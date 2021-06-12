@@ -1,11 +1,38 @@
 import styled from 'styled-components';
+import { AiFillStar } from 'react-icons/ai'
 
 export const CatalogHeader = styled.div`
-  
+  margin-top: 1rem;
+   height: 90px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  box-shadow: 0px 4px 25px 4px rgba(0, 0, 0, 0.3);
 `;
+
+export const CatalogDot = styled.div`
+  margin-left: 22rem;
+  margin-right: 1rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  background-color: #FE3189;
+  border-radius: 50%;
+`
+
+export const CatalogTitle = styled.h2`
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 400;
+
+  span{
+    font-weight: 600;
+  }
+`
 
 export const CatalogContainer = styled.div`
   /* width: 50rem; */
+  margin-left: 12rem;
   width: calc(100vw - 400px);
 `
 
@@ -27,7 +54,7 @@ export const MovieImageContainer = styled.div`
 `
 
 export const MovieImage = styled.img`
-  
+  object-fit: cover;
 `
 
 export const MovieInfo = styled.div`
@@ -49,14 +76,29 @@ export const MovieGenre = styled.p`
   margin-bottom: 2rem;
 `
 
+export const RatingContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+`
+
+export const RatingStar = styled(AiFillStar)`
+  font-size: 2rem;
+  color: #FE3189;
+
+`
+
 export const MovieRating = styled.p`
   color: #EAEAEA;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 400;
-  margin-bottom: 3rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
 `
 
 export const MovieDescription = styled.p`
+  margin-top: 30px;
   color: #9F9FA0;
   width: 100%;
   height: 5rem;

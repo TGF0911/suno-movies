@@ -39,7 +39,7 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
   const [movieList, setMovieList] = useState<Movie[]>([])
 
   async function getMovies() {
-    const { data } = await api.get('/movie/now_playing', {
+    const { data } = await api.get('/movie/popular', {
       params: {
         api_key: apiKey,
         language: 'pt-BR',
@@ -76,19 +76,17 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
   }
 
   async function loadingMore() {
-    
-    
-    const { data } = await api.get('/movie/now_playing', {
+
+
+    const { data } = await api.get('/movie/popular', {
       params: {
         api_key: apiKey,
         language: 'pt-BR',
         page: page + 1
       }
     })
-    console.log('Data Results:', data.results)
-    console.log('Movie List 1:::', movieList)
-    setMovieList([...movieList,...data.results])
-    setPage(page +1)
+    setMovieList([...movieList, ...data.results])
+    setPage(page + 1)
   }
 
 

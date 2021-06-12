@@ -5,6 +5,8 @@ import { useCatalog } from '../../contexts/CatalogContext'
 
 import {
   CatalogHeader,
+  CatalogDot,
+  CatalogTitle,
   CatalogContainer,
   CatalogItem,
   CatalogList,
@@ -12,10 +14,12 @@ import {
   MovieImage,
   MovieInfo,
   MovieTitle,
+  RatingStar,
   MovieRating,
   MovieDescription,
   ButtonConatiner,
-  LoadingButton
+  LoadingButton,
+  RatingContainer
 } from './CatalogElements'
 
 //Mudar nome do componente
@@ -29,7 +33,6 @@ export const Catalog = () => {
     getMovies()
   }, [])
 
-  //Pensar melhor nisso aqui
   function changeLimit() {
     if (count % 5 === 0) {
       loadingMore()
@@ -41,28 +44,37 @@ export const Catalog = () => {
   }
 
   return (
-    <CatalogContainer>
-      <CatalogList>
-        {
-          movieList.slice(0, limit).map((movie, index) => (
-            <CatalogItem key={movie.id} >
-              <MovieImageContainer>
-                <MovieImage src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={200} height={300} />
-              </MovieImageContainer>
-              <MovieInfo>
-                <MovieTitle>{movie.title}</MovieTitle>
-                <MovieRating>{movie.vote_average}</MovieRating>
-                <MovieDescription>{movie.overview}</MovieDescription>
-              </MovieInfo>
-            </CatalogItem>
-          ))
-        }
+    <>
+      <CatalogHeader>
+        <CatalogDot />
+        <CatalogTitle><span>Catálogo</span> Completo</CatalogTitle>
+      </CatalogHeader>
+      <CatalogContainer>
+        <CatalogList>
+          {
+            movieList.slice(0, limit).map((movie, index) => (
+              <CatalogItem key={movie.id} >
+                <MovieImageContainer>
+                  <MovieImage src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={200} height={300} />
+                </MovieImageContainer>
+                <MovieInfo>
+                  <MovieTitle>{movie.title}</MovieTitle>
+                  <RatingContainer>
+                    <RatingStar />
+                    <MovieRating> {movie.vote_average}</MovieRating>
+                  </RatingContainer>
+                  <MovieDescription>{movie.overview}</MovieDescription>
+                </MovieInfo>
+              </CatalogItem>
+            ))
+          }
 
-        <ButtonConatiner>
-          <LoadingButton onClick={changeLimit} >Carregar Mais</LoadingButton>
-        </ButtonConatiner>
-      </CatalogList>
+          <ButtonConatiner>
+            <LoadingButton onClick={changeLimit} >Carregar Mais</LoadingButton>
+          </ButtonConatiner>
+        </CatalogList>
 
-    </CatalogContainer>
+      </CatalogContainer>
+    </>
   )
 }

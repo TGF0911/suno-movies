@@ -3,6 +3,7 @@ import { GlobalStyle } from './globalStyle';
 import { Navbar } from './components/Navbar';
 import { CatalogProvider } from './contexts/CatalogContext';
 import { Catalog } from './components/Catalog';
+import { Latest } from './components/Latest';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <CatalogProvider>
       <GlobalStyle />
       <Navbar />
+      <Latest />
       <Catalog />
       </CatalogProvider>
     </Router>
