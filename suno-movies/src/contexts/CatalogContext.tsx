@@ -16,38 +16,39 @@ type Movie = {
   title: string;
   backdrop_path: string | null;
   popularity: number;
+  vote_average: number;
 }
 
+//TALVEZ NÃO PRECISE DE TODAS ESSAS INFOS
 type CatalogContextData = {
   page: number;
   totalResults: number;
   totalPages: number;
   movieList: Movie[];
   getMovies: () => void;
+  loadingMore: () => void;
 }
 
 const CatalogContext = createContext({} as CatalogContextData)
 
-export function ListProvider({ children }: CatalogContextPorps) {
+export function CatalogProvider({ children }: CatalogContextPorps) {
 
   const [page, setPage] = useState(1)
   const [totalResults, setTotalResults] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
-  const [movieList, setMovieList] = useState([])
+  const [movieList, setMovieList] = useState<Movie[]>([])
 
   async function getMovies() {
     const { data } = await api.get('/movie/now_playing', {
       params: {
         api_key: apiKey,
         language: 'pt-BR',
-        page
       }
     })
 
     setMovieList(data.results)
     setTotalPages(data.total_pages)
     setTotalResults(data.total_results)
-    setPage(page)
   }
 
   async function ratingFilter(rating: string) {
@@ -74,6 +75,22 @@ export function ListProvider({ children }: CatalogContextPorps) {
     setTotalResults(data.total_results)
   }
 
+  async function loadingMore() {
+    
+    
+    const { data } = await api.get('/movie/now_playing', {
+      params: {
+        api_key: apiKey,
+        language: 'pt-BR',
+        page: page + 1
+      }
+    })
+    console.log('Data Results:', data.results)
+    console.log('Movie List 1:::', movieList)
+    setMovieList([...movieList,...data.results])
+    setPage(page +1)
+  }
+
 
   return (
     <CatalogContext.Provider value={{
@@ -82,10 +99,11 @@ export function ListProvider({ children }: CatalogContextPorps) {
       totalPages,
       movieList,
       getMovies,
+      loadingMore,
     }}>
       {children}
     </CatalogContext.Provider>
   )
 }
 
-export const useList = () => useContext(CatalogContext)
+export const useCatalog = () => useContext(CatalogContext)

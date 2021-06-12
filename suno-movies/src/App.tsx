@@ -1,18 +1,17 @@
-import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { GlobalStyle } from './globalStyle';
 import { Navbar } from './components/Navbar';
-import { ListProvider } from './contexts/CatalogContext';
-import { MovieList } from './components/MovieList';
+import { CatalogProvider } from './contexts/CatalogContext';
+import { Catalog } from './components/Catalog';
 
 function App() {
   return (
     <Router>
-      <ListProvider>
+      <CatalogProvider>
       <GlobalStyle />
       <Navbar />
-      <MovieList />
-      </ListProvider>
+      <Catalog />
+      </CatalogProvider>
     </Router>
   );
 }
