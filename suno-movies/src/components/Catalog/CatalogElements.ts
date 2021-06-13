@@ -130,10 +130,11 @@ export const LoadingButton = styled.div`
   height: 50px;
   list-style: none;
   border-radius: 4px;
-  border: 1px solid #fff;
+  filter: drop-shadow(0px 0px 6px #FF0772);
   background-color: #FE3189;
-  color: #fff;
-  font-weight: 500;
+  color: #EAEAEA;
+  line-height: 22px;
+  font-weight: 600;
   cursor: pointer;
 
   display: flex;

@@ -1,18 +1,20 @@
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { GlobalStyle } from './globalStyle';
 import { Navbar } from './components/Navbar';
 import { CatalogProvider } from './contexts/CatalogContext';
 import { Catalog } from './components/Catalog';
 import { Latest } from './components/Latest';
+import Details from './pages/Details';
 
 function App() {
   return (
     <Router>
       <CatalogProvider>
       <GlobalStyle />
-      <Navbar />
+      {/* <Navbar />
       <Latest />
-      <Catalog />
+      <Catalog /> */}
+      <Route path='/movie/details/:id' component={Details}/>
       </CatalogProvider>
     </Router>
   );

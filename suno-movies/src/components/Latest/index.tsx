@@ -30,8 +30,7 @@ export const Latest = () => {
 
 
   function nextCard() {
-    const hasNext = activeIndex + 1 < 2
-    if (hasNext) {
+    if (activeIndex + 1 < 2) {
       setactiveIndex(activeIndex + 1)
     } else {
       setactiveIndex(0)
@@ -39,8 +38,7 @@ export const Latest = () => {
   }
 
   function previousCard() {
-    const hasPrevious = activeIndex > 0
-    if (hasPrevious) {
+    if (activeIndex > 0) {
       setactiveIndex(activeIndex - 1)
     } else {
       setactiveIndex(2)

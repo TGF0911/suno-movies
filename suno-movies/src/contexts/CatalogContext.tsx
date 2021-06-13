@@ -12,10 +12,7 @@ type Movie = {
   genreIds: number[];
   poster_path: string;
   overview: string;
-  release_date: string;
   title: string;
-  backdrop_path: string | null;
-  popularity: number;
   vote_average: number;
 }
 
