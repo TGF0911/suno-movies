@@ -40,7 +40,7 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
             <Option value="" hidden>por genêro</Option>
             {
               genre.map(genre => (
-                <Option value={genre.id} >{genre.name}</Option>
+                <Option key={genre.id} value={genre.id} >{genre.name}</Option>
               ))
             }
           </Select>

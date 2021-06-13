@@ -13,7 +13,9 @@ import {
   MovieDetails,
   MovieImage,
   RatingContainer,
-  RatingStar
+  RatingStar,
+  ArrowRigth,
+  ArrowLeft
 } from "./LatestElements"
 
 //isActive={isActive} activeIndex={activeIndex}
@@ -47,9 +49,10 @@ export const Latest = () => {
 
 
   function nextCard() {
-    if (activeIndex + 1 < 2) {
-      setLimit(limit + 4)
+    if (activeIndex + 5 < 15) {
+      setLimit(limit + 5)
       setactiveIndex(activeIndex + 5)
+      console.log(activeIndex)
     } else {
       setLimit(4)
       setactiveIndex(0)
@@ -57,11 +60,12 @@ export const Latest = () => {
   }
 
   function previousCard() {
-    if (activeIndex > 0) {
-      setLimit(limit - 4)
+    if (activeIndex - 5 > 0) {
+      setLimit(limit - 5)
       setactiveIndex(activeIndex - 5)
+      console.log(activeIndex)
     } else {
-      setLimit(12)
+      setLimit(13)
       setactiveIndex(15)
     }
   }
@@ -73,10 +77,10 @@ export const Latest = () => {
         <LatestTitle><span>Lançamentos</span> da semana</LatestTitle>
       </LatestHeader>
       <Carousel>
-        {/* <ArrowLeft onClick={previousCard} /> */}
+        <ArrowLeft onClick={previousCard} />
         <CarouselInner>
           {
-            latestList.slice(0, 4).map(movie => (
+            latestList.slice(activeIndex, limit).map(movie => (
               <MovieCard key={movie.id}>
                 <MovieImage src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
                 <MovieDetails>
@@ -90,7 +94,7 @@ export const Latest = () => {
             ))
           }
         </CarouselInner>
-        {/* <ArrowRigth onClick={nextCard} /> */}
+        <ArrowRigth onClick={nextCard} />
       </Carousel>
     </LatestContainer>
   )

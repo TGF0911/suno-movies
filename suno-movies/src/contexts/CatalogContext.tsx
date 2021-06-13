@@ -7,9 +7,14 @@ interface CatalogContextPorps {
   children: ReactNode;
 }
 
+type Genre = {
+  id: number;
+  name: string | null;
+}
+
 type Movie = {
   id: number;
-  genreIds: number[];
+  genreIds: Genre[];
   poster_path: string;
   overview: string;
   title: string;

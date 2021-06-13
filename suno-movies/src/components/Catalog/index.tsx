@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useCatalog } from '../../contexts/CatalogContext'
+import { api, apiKey } from '../../service/api'
 import { SelectFilter } from '../SelectFilter'
 
 import {
@@ -24,11 +25,18 @@ import {
   SelectGroup
 } from './CatalogElements'
 
+type Genre = {
+  id: number;
+  name: string;
+}
+
 export const Catalog = () => {
   const { movieList, getMovies, loadingMore, page } = useCatalog()
 
   const [limit, setLimit] = useState(4);
   const [count, setCount] = useState(0)
+  const [genres, setGenres] = useState<Genre[]>([])
+  const [genreNames, setGenreNames] = useState('')
 
   useEffect(() => {
     getMovies()
@@ -42,6 +50,23 @@ export const Catalog = () => {
     setLimit(limit + 4);
     setCount(count + 1)
   }
+
+  //Isso tem que ter nos componentes - Catalogo, Latest, SearchBar
+  //Pegar os generos dos movies da movieList e transformar em string
+  //comparar os genreId da movieList com os genres 
+  //Transformar os genres em string -- Igual no Details
+
+  async function getGenres() {
+    await api.get('/genre/movie/list', {
+      params: {
+        api_key: apiKey,
+        language: 'pt-BR'
+      }
+    }).then(({data}) => setGenres(data.genres))
+    
+  }
+
+  
 
   return (
     <>

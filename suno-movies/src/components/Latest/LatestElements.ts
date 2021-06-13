@@ -41,9 +41,15 @@ export const Carousel = styled.div`
   height: 400px;
   overflow: hidden;
 `
-export const ArrowLeft = styled(IoIosArrowBack)``
+export const ArrowLeft = styled(IoIosArrowBack)`
+font-size: 1rem;
+  color: #fff;
+`
 
-export const ArrowRigth = styled(IoIosArrowForward)``
+export const ArrowRigth = styled(IoIosArrowForward)`
+  font-size: 1rem;
+  color: #fff;
+`
 
 export const CarouselInner = styled.ul`
  display: grid;
@@ -52,6 +58,11 @@ export const CarouselInner = styled.ul`
  justify-content: center;
 
  transition: transform 0.3s;
+
+ @media screen and (max-width: 400px){
+  display: grid;
+  grid-template-columns: repeat(1,16rem);
+  }
 `
 
 export const MovieCard = styled.li`

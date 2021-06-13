@@ -111,7 +111,7 @@ export default function Details() {
         </TrailerContainer>
 
         <ButtonContainer>
-          <BackButton to='/home'>Voltar</BackButton>
+          <BackButton to='/'>Voltar</BackButton>
         </ButtonContainer>
       </DetailsContainer>
       <Footer />
