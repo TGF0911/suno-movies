@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useCatalog } from '../../contexts/CatalogContext'
+import { SelectFilter } from '../SelectFilter'
 
 import {
   CatalogHeader,
@@ -19,7 +20,8 @@ import {
   MovieDescription,
   ButtonConatiner,
   LoadingButton,
-  RatingContainer
+  RatingContainer,
+  SelectGroup
 } from './CatalogElements'
 
 //Mudar nome do componente
@@ -50,6 +52,13 @@ export const Catalog = () => {
         <CatalogTitle><span>Catálogo</span> Completo</CatalogTitle>
       </CatalogHeader>
       <CatalogContainer>
+        <SelectGroup>
+          <div>
+            <SelectFilter type='genre' styleName={false} />
+            <SelectFilter type='rating' styleName={false} />
+          </div>
+          <SelectFilter type='list' styleName={false} />
+        </SelectGroup>
         <CatalogList>
           {
             movieList.slice(0, limit).map((movie, index) => (

@@ -37,6 +37,7 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
   const [totalResults, setTotalResults] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
   const [movieList, setMovieList] = useState<Movie[]>([])
+  const [isSort, setIsSort] = useState(false)
 
   async function getMovies() {
     const { data } = await api.get('/movie/popular', {
@@ -58,6 +59,22 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
         language: 'pt-BR',
       }
     })
+
+    setMovieList(data.results)
+    setTotalPages(data.total_pages)
+    setTotalResults(data.total_results)
+  }
+
+  function sortBy(sortType: string) {
+    if (sortType === 'more') {
+      const movies = movieList.sort((a, b) => b.vote_average - a.vote_average)
+      setMovieList(movies)
+      setIsSort(true)
+    } else {
+      const movies = movieList.sort((a, b) => b.vote_average - a.vote_average)
+      setMovieList(movies)
+      setIsSort(true)
+    }
   }
 
   async function genreFilter(genderId: number) {
@@ -66,7 +83,6 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
         api_key: apiKey,
         language: 'pt-BR',
         with_genres: genderId,
-        page
       }
     })
 
@@ -75,17 +91,21 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
     setTotalResults(data.total_results)
   }
 
+  //Mandar a url como parametro
+  //Pensar mais sobre a page (Talvez precise ser mandado como parametro também)
   async function loadingMore() {
-
-
-    const { data } = await api.get('/movie/popular', {
+       const { data } = await api.get('/movie/popular', {
       params: {
         api_key: apiKey,
         language: 'pt-BR',
         page: page + 1
       }
     })
-    setMovieList([...movieList, ...data.results])
+
+    if(isSort){
+      setMovieList([...movieList, ...data.results])
+      
+    }
     setPage(page + 1)
   }
 

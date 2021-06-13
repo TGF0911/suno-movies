@@ -71,7 +71,7 @@ export const Latest = () => {
             ))
           }
         </CarouselInner>
-        <button onClick={nextCard}>Proximo</button>
+        {/* <button onClick={nextCard}>Proximo</button> */}
       </Carousel>
     </LatestContainer>
   )

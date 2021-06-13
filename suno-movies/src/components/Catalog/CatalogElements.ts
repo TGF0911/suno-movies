@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai'
 
 export const CatalogHeader = styled.div`
-  margin-top: 1rem;
+  margin-top: 10rem;
    height: 90px;
   display: flex;
   justify-content: flex-start;
@@ -36,9 +36,20 @@ export const CatalogContainer = styled.div`
   width: calc(100vw - 400px);
 `
 
+export const SelectGroup = styled.div`
+  margin-top: 2rem;
+  padding: 2rem 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+   
+`
+
+
+
 export const CatalogList = styled.ul`
-  margin: 4rem;
-  padding: 2rem 4rem;
+  margin: 0 4rem;
+  padding: 3rem 4rem;
   list-style: none;
 `
 
@@ -108,7 +119,7 @@ export const MovieDescription = styled.p`
 `
 
 export const ButtonConatiner = styled.div`
-  margin: 2rem;
+  margin: 4rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;

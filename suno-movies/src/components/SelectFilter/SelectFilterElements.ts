@@ -1,54 +1,34 @@
 import styled from 'styled-components';
 
-export const SelectWrapper = styled.div`
-  position: absolute;
-`;
 
-export const SelectWrap = styled.div`
-  width: 24rem;
-  margin: 1rem auto;
-  position: relative;
-  user-select: none;
+export const Select = styled.select`
+  margin-right: 2rem;
+  width: 10rem;
+  height: 3rem;
+  background: linear-gradient(180deg, #212125 0%, #2E2E35 100%), #212125;
+  border: 2px solid #2E2D31;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+ 
 `
 
-export const SelectDefault = styled.ul`
+export const Option = styled.option`
+  color: #212125;
     background: #fff;
-    border-radius: 5px;
-    position: relative;
-    cursor: pointer;
-
-    li{
-      padding: 10px 20px;
+    display: flex;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+    border-radius: 10px;
+    border: 2px solid #2E2D31;
+    ::-webkit-scrollbar-thumb{
+      background: #525861;
+      border-radius: 0 8px 8px 0;
     }
 `
-export const SelectList = styled.ul`
-  position: absolute;
-  top: 55px;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  border-radius: 5px;
-  display: none;
-`
 
-export const SelectItem = styled.li`
-  padding: 10px;
-  cursor: pointer;
 
-  :first-child:hover{
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-
-  :last-child:hover{
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-  }
-
-  :hover{
-    background: #fff4dd;
-  }
-`
 
 
 

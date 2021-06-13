@@ -6,9 +6,10 @@ interface LatestProps {
 }
 //<LatestProps>
 // transform: translateX(${({activeIndex }) => (`${activeIndex * 100}`)}) 
+//Colocar backgound
 
 export const LatestContainer = styled.div`
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
 `;
 
 export const LatestHeader = styled.div`
@@ -40,7 +41,7 @@ export const LatestTitle = styled.h2`
 `
 
 export const Carousel = styled.div`
-  height: 350px;
+  height: 400px;
   overflow: hidden;
 `
 
@@ -56,7 +57,7 @@ export const CarouselInner = styled.ul<LatestProps>`
 
 export const MovieCard = styled.li`
   width: 15rem;
-  height: 14rem;
+  height: 20rem;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
