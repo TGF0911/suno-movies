@@ -19,11 +19,10 @@ type Movie = {
 //TALVEZ NÃO PRECISE DE TODAS ESSAS INFOS
 type CatalogContextData = {
   page: number;
-  totalResults: number;
-  totalPages: number;
   movieList: Movie[];
   getMovies: () => void;
   loadingMore: () => void;
+  genreFilter: (genresId: number[]) => void;
 }
 
 const CatalogContext = createContext({} as CatalogContextData)
@@ -34,7 +33,7 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
   const [totalResults, setTotalResults] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
   const [movieList, setMovieList] = useState<Movie[]>([])
-  const [isSort, setIsSort] = useState(false)
+  const [isFilter, setIsFilter] = useState(false)
 
   async function getMovies() {
     const { data } = await api.get('/movie/popular', {
@@ -45,11 +44,9 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
     })
 
     setMovieList(data.results)
-    setTotalPages(data.total_pages)
-    setTotalResults(data.total_results)
   }
 
-  async function ratingFilter(rating: string) {
+  async function topRating(rating: string) {
     const { data } = await api.get('/movie/top_rated', {
       params: {
         api_key: apiKey,
@@ -62,20 +59,33 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
     setTotalResults(data.total_results)
   }
 
-  function sortBy(sortType: string) {
-    if (sortType === 'more') {
-      const movies = movieList.sort((a, b) => b.vote_average - a.vote_average)
-      setMovieList(movies)
-      setIsSort(true)
+  ////discover/movie
+  //vote_average.asc, vote_average.desc
+  async function sortBy(sortType: string, genderId?: number[]) {
+    if (isFilter) {
+      const { data } = await api.get('/discover/movie', {
+        params: {
+          api_key: apiKey,
+          language: 'pt-BR',
+          sort_by: sortType,
+          with_genres: genderId,
+        }
+      })
+      setMovieList(data.results)
     } else {
-      const movies = movieList.sort((a, b) => b.vote_average - a.vote_average)
-      setMovieList(movies)
-      setIsSort(true)
+      const { data } = await api.get('/discover/movie', {
+        params: {
+          api_key: apiKey,
+          language: 'pt-BR',
+          sort_by: sortType,
+        }
+      })
+      setMovieList(data.results)
     }
   }
 
-  async function genreFilter(genderId: number) {
-    const { data } = await api.get('/movie', {
+  async function genreFilter(genderId: number[]) {
+    const { data } = await api.get('/discover/movie', {
       params: {
         api_key: apiKey,
         language: 'pt-BR',
@@ -84,25 +94,20 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
     })
 
     setMovieList(data.results)
-    setTotalPages(data.total_pages)
-    setTotalResults(data.total_results)
+    setIsFilter(true)
   }
 
   //Mandar a url como parametro
   //Pensar mais sobre a page (Talvez precise ser mandado como parametro também)
   async function loadingMore() {
-       const { data } = await api.get('/movie/popular', {
+    const { data } = await api.get('/movie/popular', {
       params: {
         api_key: apiKey,
         language: 'pt-BR',
         page: page + 1
       }
     })
-
-    if(isSort){
-      setMovieList([...movieList, ...data.results])
-      
-    }
+    setMovieList([...movieList, ...data.results])
     setPage(page + 1)
   }
 
@@ -110,11 +115,10 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
   return (
     <CatalogContext.Provider value={{
       page,
-      totalResults,
-      totalPages,
       movieList,
       getMovies,
       loadingMore,
+      genreFilter
     }}>
       {children}
     </CatalogContext.Provider>

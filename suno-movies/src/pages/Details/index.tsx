@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player'
 import { Navbar } from '../../components/Navbar'
 import { api, apiKey } from '../../service/api'
 import { BackButton, ButtonContainer, DetailsContainer, DetailTitle, MovieDescription, MovieDetails, MovieGenre, MovieImage, MovieInfoGroup, MovieInfos, MovieRating, MovieTitle, RatingContainer, RatingStar, TrailerContainer } from './DetailsElements'
+import { Footer } from '../../components/Footer'
 
 type Movie = {
   id: number;
@@ -113,6 +114,7 @@ export default function Details() {
           <BackButton to='/home'>Voltar</BackButton>
         </ButtonContainer>
       </DetailsContainer>
+      <Footer />
     </>
   )
 }

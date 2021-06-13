@@ -1,11 +1,8 @@
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai'
+import { IoIosArrowForward,  IoIosArrowBack} from 'react-icons/io'
 
-interface LatestProps {
-  activeIndex: number;
-}
-//<LatestProps>
-// transform: translateX(${({activeIndex }) => (`${activeIndex * 100}`)}) 
+
 //Colocar backgound
 
 export const LatestContainer = styled.div`
@@ -44,15 +41,17 @@ export const Carousel = styled.div`
   height: 400px;
   overflow: hidden;
 `
+export const ArrowLeft = styled(IoIosArrowBack)``
 
-export const CarouselInner = styled.ul<LatestProps>`
+export const ArrowRigth = styled(IoIosArrowForward)``
+
+export const CarouselInner = styled.ul`
  display: grid;
- grid-template-columns: repeat(12,16rem);
+ grid-template-columns: repeat(4,16rem);
  align-items: center;
  justify-content: center;
 
  transition: transform 0.3s;
- transform: translateX(${({activeIndex }) => (`${activeIndex * 100}`)}) 
 `
 
 export const MovieCard = styled.li`

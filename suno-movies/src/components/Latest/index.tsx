@@ -1,6 +1,20 @@
 import { useEffect, useState } from "react"
 import { api, apiKey } from "../../service/api"
-import { Carousel, CarouselInner, LatestContainer, LatestDot, LatestHeader, LatestTitle, MovieCard, MovieTitle, MovieRating, MovieDetails, MovieImage, RatingContainer, RatingStar } from "./LatestElements"
+import {
+  Carousel,
+  CarouselInner,
+  LatestContainer,
+  LatestDot,
+  LatestHeader,
+  LatestTitle,
+  MovieCard,
+  MovieTitle,
+  MovieRating,
+  MovieDetails,
+  MovieImage,
+  RatingContainer,
+  RatingStar
+} from "./LatestElements"
 
 //isActive={isActive} activeIndex={activeIndex}
 
@@ -15,8 +29,10 @@ interface Movie {
 
 export const Latest = () => {
   //const [isActive, setIsActive] = useState(false)
-  const [activeIndex, setactiveIndex] = useState(0)
   const [latestList, setLatestList] = useState<Movie[]>([])
+
+  const [limit, setLimit] = useState(4);
+  const [activeIndex, setactiveIndex] = useState(0)
 
   useEffect(() => {
     api.get('/movie/now_playing', {
@@ -29,19 +45,24 @@ export const Latest = () => {
   }, [apiKey])
 
 
+
   function nextCard() {
     if (activeIndex + 1 < 2) {
-      setactiveIndex(activeIndex + 1)
+      setLimit(limit + 4)
+      setactiveIndex(activeIndex + 5)
     } else {
+      setLimit(4)
       setactiveIndex(0)
     }
   }
 
   function previousCard() {
     if (activeIndex > 0) {
-      setactiveIndex(activeIndex - 1)
+      setLimit(limit - 4)
+      setactiveIndex(activeIndex - 5)
     } else {
-      setactiveIndex(2)
+      setLimit(12)
+      setactiveIndex(15)
     }
   }
 
@@ -52,10 +73,10 @@ export const Latest = () => {
         <LatestTitle><span>Lançamentos</span> da semana</LatestTitle>
       </LatestHeader>
       <Carousel>
-        {/* <button onClick={previousCard}>Anterior</button> */}
-        <CarouselInner activeIndex={activeIndex} >
+        {/* <ArrowLeft onClick={previousCard} /> */}
+        <CarouselInner>
           {
-            latestList.slice(0, 12).map(movie => (
+            latestList.slice(0, 4).map(movie => (
               <MovieCard key={movie.id}>
                 <MovieImage src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
                 <MovieDetails>
@@ -69,7 +90,7 @@ export const Latest = () => {
             ))
           }
         </CarouselInner>
-        {/* <button onClick={nextCard}>Proximo</button> */}
+        {/* <ArrowRigth onClick={nextCard} /> */}
       </Carousel>
     </LatestContainer>
   )

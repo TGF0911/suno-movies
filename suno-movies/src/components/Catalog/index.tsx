@@ -24,7 +24,6 @@ import {
   SelectGroup
 } from './CatalogElements'
 
-//Mudar nome do componente
 export const Catalog = () => {
   const { movieList, getMovies, loadingMore, page } = useCatalog()
 
@@ -39,7 +38,6 @@ export const Catalog = () => {
     if (count % 5 === 0) {
       loadingMore()
       setCount(count + 1)
-      console.log('Page:', page)
     }
     setLimit(limit + 4);
     setCount(count + 1)
