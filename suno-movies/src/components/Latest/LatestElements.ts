@@ -11,7 +11,7 @@ export const LatestContainer = styled.div`
 
 export const LatestHeader = styled.div`
   margin-top: 4rem;
-  margin-left: 22rem;
+  margin-left: 18rem;
   margin-bottom: 4rem;
   display: flex;
   justify-content: flex-start;
@@ -40,14 +40,19 @@ export const LatestTitle = styled.h2`
 export const Carousel = styled.div`
   height: 400px;
   overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 export const ArrowLeft = styled(IoIosArrowBack)`
-font-size: 1rem;
+margin-right: 2.3rem;
+  font-size: 3rem;
   color: #fff;
 `
 
 export const ArrowRigth = styled(IoIosArrowForward)`
-  font-size: 1rem;
+  font-size: 3rem;
   color: #fff;
 `
 

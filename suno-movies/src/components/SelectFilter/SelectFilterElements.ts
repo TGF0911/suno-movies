@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const SelectContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
 
 export const Select = styled.select`
   margin-right: 2rem;

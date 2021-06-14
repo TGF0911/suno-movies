@@ -20,9 +20,12 @@ import {
   MovieRating,
   MovieDescription,
   ButtonConatiner,
-  LoadingButton,
   RatingContainer,
-  SelectGroup
+  SelectGroup,
+  Button,
+  Group,
+  DescriptionContainer,
+  PlayLink
 } from './CatalogElements'
 
 type Genre = {
@@ -31,9 +34,9 @@ type Genre = {
 }
 
 export const Catalog = () => {
-  const { movieList, getMovies, loadingMore, page } = useCatalog()
+  const { movieList, getMovies, loadingMore, genreFilter, sortBy } = useCatalog()
 
-  const [limit, setLimit] = useState(4);
+  const [limit, setLimit] = useState(6);
   const [count, setCount] = useState(0)
   const [genres, setGenres] = useState<Genre[]>([])
   const [genreNames, setGenreNames] = useState('')
@@ -62,11 +65,10 @@ export const Catalog = () => {
         api_key: apiKey,
         language: 'pt-BR'
       }
-    }).then(({data}) => setGenres(data.genres))
-    
+    }).then(({ data }) => setGenres(data.genres))
+
   }
 
-  
 
   return (
     <>
@@ -75,34 +77,37 @@ export const Catalog = () => {
         <CatalogTitle><span>Catálogo</span> Completo</CatalogTitle>
       </CatalogHeader>
       <CatalogContainer>
-        <SelectGroup>
-          <div>
-            <SelectFilter type='genre' styleName={false} />
-            <SelectFilter type='rating' styleName={false} />
-          </div>
-          <SelectFilter type='list' styleName={false} />
+        <SelectGroup >
+          <Group>
+            <SelectFilter type='genre' />
+            <Button onClick={() => sortBy('vote_average.desc')} >mais populares</Button>
+          </Group>
+          <SelectFilter type='list' />
         </SelectGroup>
-        <CatalogList>
+        <CatalogList >
           {
             movieList.slice(0, limit).map((movie, index) => (
               <CatalogItem key={movie.id} >
                 <MovieImageContainer>
                   <MovieImage src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={200} height={300} />
+                  <PlayLink to={`/movie/details/${movie.id}`} />
                 </MovieImageContainer>
                 <MovieInfo>
-                  <MovieTitle>{movie.title}</MovieTitle>
+                  <MovieTitle to={`/movie/details/${movie.id}`}>{movie.title}</MovieTitle>
                   <RatingContainer>
                     <RatingStar />
                     <MovieRating> {movie.vote_average}</MovieRating>
                   </RatingContainer>
-                  <MovieDescription>{movie.overview}</MovieDescription>
+                  <DescriptionContainer>
+                    <MovieDescription>{movie.overview}</MovieDescription>
+                  </DescriptionContainer>
                 </MovieInfo>
               </CatalogItem>
             ))
           }
 
           <ButtonConatiner>
-            <LoadingButton onClick={changeLimit} >Carregar Mais</LoadingButton>
+            <Button onClick={changeLimit} >Carregar Mais</Button>
           </ButtonConatiner>
         </CatalogList>
 

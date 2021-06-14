@@ -27,7 +27,8 @@ type CatalogContextData = {
   movieList: Movie[];
   getMovies: () => void;
   loadingMore: () => void;
-  genreFilter: (genresId: number[]) => void;
+  genreFilter: (genresId: number) => void;
+  sortBy: (sortType: string) => void;
 }
 
 const CatalogContext = createContext({} as CatalogContextData)
@@ -64,16 +65,23 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
     setTotalResults(data.total_results)
   }
 
+  function ListGrid(isList: boolean){
+    if(isList){
+      const list = true
+    } else{
+      const grid = true
+    }
+  }
+
   ////discover/movie
   //vote_average.asc, vote_average.desc
-  async function sortBy(sortType: string, genderId?: number[]) {
+  async function sortBy(sortType: string) {
     if (isFilter) {
       const { data } = await api.get('/discover/movie', {
         params: {
           api_key: apiKey,
           language: 'pt-BR',
           sort_by: sortType,
-          with_genres: genderId,
         }
       })
       setMovieList(data.results)
@@ -89,7 +97,7 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
     }
   }
 
-  async function genreFilter(genderId: number[]) {
+  async function genreFilter(genderId: number) {
     const { data } = await api.get('/discover/movie', {
       params: {
         api_key: apiKey,
@@ -97,7 +105,6 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
         with_genres: genderId,
       }
     })
-
     setMovieList(data.results)
     setIsFilter(true)
   }
@@ -123,7 +130,8 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
       movieList,
       getMovies,
       loadingMore,
-      genreFilter
+      genreFilter,
+      sortBy
     }}>
       {children}
     </CatalogContext.Provider>

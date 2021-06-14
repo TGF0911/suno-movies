@@ -1,10 +1,11 @@
 import { SelectHTMLAttributes, useEffect, useState } from 'react'
+import { useCatalog } from '../../contexts/CatalogContext'
 import { api, apiKey } from '../../service/api'
-import { Select, Option } from './SelectFilterElements'
+import { Select, Option, SelectContainer } from './SelectFilterElements'
 
 interface SelectFilterProps extends SelectHTMLAttributes<HTMLSelectElement>{
   type: string
-  styleName: boolean;
+  
 }
 
 interface Genre {
@@ -14,7 +15,11 @@ interface Genre {
 
 
 export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
+  const { genreFilter } = useCatalog()
   const [genre, setGenre] = useState<Genre[]>([])
+  const [genreValue, setGenreValue] = useState(0)
+  
+
 
   useEffect(() => {
     api.get('/genre/movie/list', {
@@ -24,6 +29,11 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
       }
     }).then(({ data }) => setGenre(data.genres))
   }, [apiKey])
+
+  useEffect(() => {
+    genreFilter(genreValue)
+  }, [genreValue])
+
 
   return (
     <>
@@ -35,7 +45,10 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
           </Select>
 
         ) : type ==='genre' ? (
-          <Select>
+          <Select value={genreValue} onChange={e => {
+            setGenreValue(Number(e.target.value))
+            
+          }}>
 
             <Option value="" hidden>por genêro</Option>
             {
