@@ -27,6 +27,7 @@ type CatalogContextData = {
   movieList: Movie[];
   getMovies: () => void;
   loadingMore: () => void;
+  topRating: () => void;
   genreFilter: (genresId: number) => void;
   sortBy: (sortType: string) => void;
 }
@@ -36,8 +37,8 @@ const CatalogContext = createContext({} as CatalogContextData)
 export function CatalogProvider({ children }: CatalogContextPorps) {
 
   const [page, setPage] = useState(1)
-  const [totalResults, setTotalResults] = useState(0)
-  const [totalPages, setTotalPages] = useState(0)
+  //const [totalResults, setTotalResults] = useState(0)
+  //const [totalPages, setTotalPages] = useState(0)
   const [movieList, setMovieList] = useState<Movie[]>([])
   const [isFilter, setIsFilter] = useState(false)
 
@@ -52,25 +53,14 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
     setMovieList(data.results)
   }
 
-  async function topRating(rating: string) {
+  async function topRating() {
     const { data } = await api.get('/movie/top_rated', {
       params: {
         api_key: apiKey,
         language: 'pt-BR',
       }
     })
-
     setMovieList(data.results)
-    setTotalPages(data.total_pages)
-    setTotalResults(data.total_results)
-  }
-
-  function ListGrid(isList: boolean){
-    if(isList){
-      const list = true
-    } else{
-      const grid = true
-    }
   }
 
   ////discover/movie
@@ -131,7 +121,8 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
       getMovies,
       loadingMore,
       genreFilter,
-      sortBy
+      sortBy,
+      topRating
     }}>
       {children}
     </CatalogContext.Provider>

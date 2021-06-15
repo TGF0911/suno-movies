@@ -53,6 +53,8 @@ export const CatalogList = styled.ul<CatalogListProps>`
   margin: 0 4rem;
   padding: 3rem 4rem;
   list-style: none;
+  // aqui Muda
+  
 `
 
 export const CatalogItem = styled.li`
@@ -122,6 +124,7 @@ export const MovieDescription = styled.p`
   font-size: 0.8rem;
   font-weight: 300;
   text-overflow: ellipsis;
+  /* Aqui muda */
 `
 
 export const ButtonConatiner = styled.div`

@@ -4,14 +4,30 @@ import { useParams } from 'react-router-dom'
 import ReactPlayer from 'react-player'
 import { Navbar } from '../../components/Navbar'
 import { api, apiKey } from '../../service/api'
-import { BackButton, ButtonContainer, DetailsContainer, DetailTitle, MovieDescription, MovieDetails, MovieGenre, MovieImage, MovieInfoGroup, MovieInfos, MovieRating, MovieTitle, RatingContainer, RatingStar, TrailerContainer } from './DetailsElements'
+import {
+  BackButton,
+  ButtonContainer,
+  DetailsContainer,
+  DetailTitle,
+  MovieDescription,
+  MovieDetails,
+  MovieGenre,
+  MovieImage,
+  MovieInfoGroup,
+  MovieInfos,
+  MovieRating,
+  MovieTitle,
+  RatingContainer,
+  RatingStar,
+  TrailerContainer
+} from './DetailsElements'
 import { Footer } from '../../components/Footer'
 
 type Movie = {
   id: number;
   genres: {
     id: number;
-    name:string;
+    name: string;
   }[];
   poster_path: string;
   overview: string;
@@ -44,7 +60,7 @@ export default function Details() {
         language: 'pt-BR'
       }
     }).then(({ data }) => setMovie(data))
-  }, [apiKey, id])
+  }, [id])
 
   useEffect(() => {
     api.get(`/movie/${id}/videos`, {
@@ -53,15 +69,15 @@ export default function Details() {
         language: 'pt-BR'
       }
     }).then(({ data }) => setVideos(data.results))
-  }, [apiKey, id])
+  }, [id])
 
-  useEffect(()=> {
+  useEffect(() => {
     const names: string[] = []
     movie?.genres.map(genre => {
       names.push(genre.name)
     })
     const genre = names?.join(', ')
-    setGenres(genre) 
+    setGenres(genre)
 
   }, [movie?.genres])
 
@@ -97,12 +113,12 @@ export default function Details() {
               <div className="trailer">
                 {
                   videos.slice(0, 1).map(video => (
-                     <ReactPlayer 
-                     url={video.site === 'YouTube' ? `https://www.youtube.com/watch?v=${video.key}` : `https://vimeo.com/${video.key}`}
-                     controls={true}
-                     width='100%'
-                     height='100%'
-                     />
+                    <ReactPlayer
+                      url={video.site === 'YouTube' ? `https://www.youtube.com/watch?v=${video.key}` : `https://vimeo.com/${video.key}`}
+                      controls={true}
+                      width='100%'
+                      height='100%'
+                    />
                   ))
                 }
               </div>

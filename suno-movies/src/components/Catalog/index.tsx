@@ -1,8 +1,8 @@
-import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useCatalog } from '../../contexts/CatalogContext'
 import { api, apiKey } from '../../service/api'
+import { Movie } from '../Movie'
 import { SelectFilter } from '../SelectFilter'
 
 import {
@@ -10,22 +10,12 @@ import {
   CatalogDot,
   CatalogTitle,
   CatalogContainer,
-  CatalogItem,
   CatalogList,
-  MovieImageContainer,
-  MovieImage,
-  MovieInfo,
-  MovieTitle,
-  RatingStar,
-  MovieRating,
-  MovieDescription,
   ButtonConatiner,
-  RatingContainer,
   SelectGroup,
   Button,
   Group,
-  DescriptionContainer,
-  PlayLink
+
 } from './CatalogElements'
 
 type Genre = {
@@ -38,8 +28,8 @@ export const Catalog = () => {
 
   const [limit, setLimit] = useState(6);
   const [count, setCount] = useState(0)
-  const [genres, setGenres] = useState<Genre[]>([])
-  const [genreNames, setGenreNames] = useState('')
+  //const [genres, setGenres] = useState<Genre[]>([])
+  //const [genreNames, setGenreNames] = useState('')
 
   useEffect(() => {
     getMovies()
@@ -59,15 +49,15 @@ export const Catalog = () => {
   //comparar os genreId da movieList com os genres 
   //Transformar os genres em string -- Igual no Details
 
-  async function getGenres() {
-    await api.get('/genre/movie/list', {
-      params: {
-        api_key: apiKey,
-        language: 'pt-BR'
-      }
-    }).then(({ data }) => setGenres(data.genres))
+  // async function getGenres() {
+  //   await api.get('/genre/movie/list', {
+  //     params: {
+  //       api_key: apiKey,
+  //       language: 'pt-BR'
+  //     }
+  //   }).then(({ data }) => setGenres(data.genres))
 
-  }
+  // }
 
 
   return (
@@ -82,27 +72,20 @@ export const Catalog = () => {
             <SelectFilter type='genre' />
             <Button onClick={() => sortBy('vote_average.desc')} >mais populares</Button>
           </Group>
-          <SelectFilter type='list' />
+          <SelectFilter type='list' className='list-type'/>
         </SelectGroup>
         <CatalogList >
           {
             movieList.slice(0, limit).map((movie, index) => (
-              <CatalogItem key={movie.id} >
-                <MovieImageContainer>
-                  <MovieImage src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} width={200} height={300} />
-                  <PlayLink to={`/movie/details/${movie.id}`} />
-                </MovieImageContainer>
-                <MovieInfo>
-                  <MovieTitle to={`/movie/details/${movie.id}`}>{movie.title}</MovieTitle>
-                  <RatingContainer>
-                    <RatingStar />
-                    <MovieRating> {movie.vote_average}</MovieRating>
-                  </RatingContainer>
-                  <DescriptionContainer>
-                    <MovieDescription>{movie.overview}</MovieDescription>
-                  </DescriptionContainer>
-                </MovieInfo>
-              </CatalogItem>
+            <Movie 
+              key={movie.id}
+              id={movie.id}
+              title={movie.title}
+              overview={movie.overview}
+              poster_path={movie.poster_path}
+              vote_average={movie.vote_average}
+              //genre={movie.genreIds}
+            />
             ))
           }
 

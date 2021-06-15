@@ -16,6 +16,11 @@ export const Select = styled.select`
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+
+  @media screen and (max-width: 1000px){
+    width: 12rem;
+    height: 4rem;
+  }
  
 `
 

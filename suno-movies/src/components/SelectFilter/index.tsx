@@ -28,7 +28,7 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
         language: 'pt-BR'
       }
     }).then(({ data }) => setGenre(data.genres))
-  }, [apiKey])
+  }, [])
 
   useEffect(() => {
     genreFilter(genreValue)
@@ -39,7 +39,7 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
     <>
       {
         type === 'list' ? (
-          <Select>
+          <Select className='list-type'>
             <Option value='lista'>por lista</Option>
             <Option value='grid'>por grid</Option>
           </Select>

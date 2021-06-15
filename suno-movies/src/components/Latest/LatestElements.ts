@@ -1,20 +1,22 @@
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai'
 import { IoIosArrowForward,  IoIosArrowBack} from 'react-icons/io'
+import { Link } from 'react-router-dom';
+import { FaRegPlayCircle } from 'react-icons/fa';
 
 
 //Colocar backgound
 
 export const LatestContainer = styled.div`
   margin-bottom: 2rem;
+  display: block;
+  justify-content: center;
 `;
 
 export const LatestHeader = styled.div`
   margin-top: 4rem;
-  margin-left: 18rem;
-  margin-bottom: 4rem;
+  margin-left: 22rem;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
 
 `
@@ -38,7 +40,8 @@ export const LatestTitle = styled.h2`
 `
 
 export const Carousel = styled.div`
-  height: 400px;
+  height: 500px;
+  padding: 2rem 5rem;
   overflow: hidden;
 
   display: flex;
@@ -46,7 +49,7 @@ export const Carousel = styled.div`
   align-items: center;
 `
 export const ArrowLeft = styled(IoIosArrowBack)`
-margin-right: 2.3rem;
+  margin-right: 3rem;
   font-size: 3rem;
   color: #fff;
 `
@@ -66,7 +69,7 @@ export const CarouselInner = styled.ul`
 
  @media screen and (max-width: 400px){
   display: grid;
-  grid-template-columns: repeat(1,16rem);
+  grid-template-columns: 1fr;
   }
 `
 
@@ -76,14 +79,35 @@ export const MovieCard = styled.li`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-
-  
+`
+export const MovieImageContainer = styled.div`
+  width: 14rem;
+  height: 20rem;
 
   :hover{
-   /* background-color: #FE3189; */
-    opacity: 0.8;
+  transition: 0.5s;
+    .play {
+      opacity: 0.8;
+    }
   }
 `
+export const PlayLinkContainer = styled(Link)`
+ position: absolute;
+  width: 12rem;
+  height: 18rem;
+  background-color: rgba(254, 49, 137, 0.7);
+  opacity: 0;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+export const PlayLink = styled(FaRegPlayCircle)`
+  font-size: 8rem;
+  color: #fff;
+  background-color: transparent; 
+`
+
 export const MovieImage = styled.img`
   width: 12rem;
   height: 18rem;
@@ -99,17 +123,26 @@ export const MovieDetails = styled.div`
   
 `
 
-export const MovieTitle = styled.h4`
+export const MovieTitle = styled(Link)`
   width: 12rem;
   color: #EAEAEA;
   white-space: nowrap;
   font-size: 1.2rem;
   font-weight: 400;
+  text-decoration: none;
   text-overflow: ellipsis;
   overflow: hidden;
+
+  :hover{
+    text-decoration: underline;
+  }
 `
 
-export const MovieGenre = styled.p``
+export const MovieGenre = styled.p`
+  font-size: 1rem;
+  color: #FE3189;
+  margin-top: 0.5rem;
+`
 
 export const RatingContainer = styled.div`
   display: flex;
