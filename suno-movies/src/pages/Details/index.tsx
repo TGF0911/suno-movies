@@ -1,9 +1,9 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect,  useState } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactPlayer from 'react-player'
-import { Navbar } from '../../components/Navbar'
 import { api, apiKey } from '../../service/api'
+
+import { Navbar } from '../../components/Navbar'
 import {
   BackButton,
   ButtonContainer,

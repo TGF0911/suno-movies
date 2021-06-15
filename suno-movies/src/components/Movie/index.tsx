@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import {
   MovieCard,
   DescriptionContainer,
@@ -17,23 +16,12 @@ interface MovieProps {
   id: number;
   title: string;
   poster_path: string;
-  //genre:number[];
+  //genre:string;
   vote_average: number;
   overview: string;
 }
 
 export const Movie = ({ id, title, poster_path, vote_average, overview }: MovieProps) => {
-  //const [genres, setGenres] = useState<string>()
-
-  // useEffect(() => {
-  //   const names: string[] = []
-  //   genre.map(genre => {
-  //     names.push(genre.name)
-  //   })
-  //   const genre = names?.join(', ')
-  //   setGenres(genre)
-
-  // }, [genres])
 
   return (
     <MovieCard  >

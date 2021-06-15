@@ -3,24 +3,51 @@ import { AiFillStar } from 'react-icons/ai'
 import {Link} from 'react-router-dom'
 
 export const DetailsContainer = styled.div`
-  margin: 5rem 22rem;
+  margin: 5rem calc((100vw - 1000px) /2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media screen and (max-width: 1700px){
+    margin: 1rem 10rem;
+  }
+
+  @media screen and (max-width: 1400px){
+    margin: 1rem 3rem;
+  }
 `
 
 export const MovieDetails = styled.div`
   margin: 6rem 0;
+  margin-bottom: 10rem;
   display: flex;
   justify-content: space-evenly;
+
+  background: url('../../assets/section 1.jpg');
+
+  @media screen and (max-width: 800px){
+    display: block;
+
+    img{
+      width: 28rem;
+      height: 32rem;
+    }
+  }
 `
 
 export const MovieImage = styled.img`
   width: 26rem;
-  height: 30rem;
+  height: 32rem;
 `
 
 export const MovieInfoGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 3rem;
+  @media screen and (max-width: 800px){
+    margin-left: 0;
+    margin-top: 1rem;
+  }
 `
 
 export const MovieInfos = styled.div`
@@ -32,12 +59,19 @@ export const MovieInfos = styled.div`
 export const MovieTitle = styled.h2`
   color: #EAEAEA;
   font-size: 3.4rem;
-  font-weight: 700;`
+  font-weight: 700;
+  @media screen and (max-width: 800px){
+    font-size: 2rem;
+  }
+  `
 
 export const MovieGenre = styled.p`
   color: #FE3189;
   font-size: 1.4rem;
   font-weight: 300;
+  @media screen and (max-width: 800px){
+    font-size: 1.2rem;
+  }
 `
 
 export const RatingContainer = styled.div`
@@ -48,6 +82,9 @@ export const RatingContainer = styled.div`
 export const RatingStar = styled(AiFillStar)`
   font-size: 2rem;
   color: #FE3189;
+  @media screen and (max-width: 800px){
+    font-size: 1.2rem;
+  }
 `
 
 export const MovieRating = styled.p`
@@ -57,6 +94,10 @@ export const MovieRating = styled.p`
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 10px;
+
+  @media screen and (max-width: 800px){
+    font-size: 1.2rem;
+  }
 `
 
 export const DetailTitle = styled.h4`
@@ -64,20 +105,27 @@ export const DetailTitle = styled.h4`
     color: #fff;
     font-size: 1.3rem;
     font-weight: 600;
+
+    @media screen and (max-width: 800px){
+    font-size: 1.2rem;
+  }
 `
 
 export const MovieDescription = styled.p`
   margin-top: 30px;
   color: #9F9FA0;
-  width: 100%;
-  height: 5rem;
   font-size: 1.1rem;
   font-weight: 300;
-  text-overflow: ellipsis;
+  text-align: justify;
+  @media screen and (max-width: 800px){
+    font-size: 1rem;
+  }
 `
 
 export const TrailerContainer = styled.div`
-  margin: 5rem 2rem,;
+position: relative;
+  margin: 10rem 2rem,;
+  height: 30rem;
   h4{
     color: #EAEAEA;
     font-size: 1.8rem;
@@ -90,13 +138,15 @@ export const TrailerContainer = styled.div`
   }
   .trailer{
     margin-top: 3rem;
-    width: 62rem;
-    height: 34rem;
+    width: 100%;
+    height: 100%;
   }
+
+  
 `
 
 export const ButtonContainer = styled.div`
-  margin: 4rem 2rem;
+  margin: 14rem 2rem;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -9,19 +9,18 @@ interface CatalogContextPorps {
 
 type Genre = {
   id: number;
-  name: string | null;
+  name: string;
 }
 
 type Movie = {
   id: number;
-  genreIds: Genre[];
+  genreIds: number[];
   poster_path: string;
   overview: string;
   title: string;
   vote_average: number;
 }
 
-//TALVEZ NÃO PRECISE DE TODAS ESSAS INFOS
 type CatalogContextData = {
   page: number;
   movieList: Movie[];
@@ -37,8 +36,6 @@ const CatalogContext = createContext({} as CatalogContextData)
 export function CatalogProvider({ children }: CatalogContextPorps) {
 
   const [page, setPage] = useState(1)
-  //const [totalResults, setTotalResults] = useState(0)
-  //const [totalPages, setTotalPages] = useState(0)
   const [movieList, setMovieList] = useState<Movie[]>([])
   const [isFilter, setIsFilter] = useState(false)
 
@@ -51,6 +48,7 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
     })
 
     setMovieList(data.results)
+    setPage(data.page)
   }
 
   async function topRating() {
@@ -61,10 +59,11 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
       }
     })
     setMovieList(data.results)
+    setPage(data.page)
   }
 
   ////discover/movie
-  //vote_average.asc, vote_average.desc
+  //vote_average.desc
   async function sortBy(sortType: string) {
     if (isFilter) {
       const { data } = await api.get('/discover/movie', {
@@ -84,6 +83,7 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
         }
       })
       setMovieList(data.results)
+      setPage(data.page)
     }
   }
 
@@ -96,10 +96,11 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
       }
     })
     setMovieList(data.results)
+    setPage(data.page)
     setIsFilter(true)
   }
 
-  //Mandar a url como parametro
+  //Mandar a url como parametro - talvez com um estado e um if na function do Catalog
   //Pensar mais sobre a page (Talvez precise ser mandado como parametro também)
   async function loadingMore() {
     const { data } = await api.get('/movie/popular', {

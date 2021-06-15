@@ -15,6 +15,7 @@ import {
   SelectGroup,
   Button,
   Group,
+  CatalogDiv,
 
 } from './CatalogElements'
 
@@ -24,7 +25,7 @@ type Genre = {
 }
 
 export const Catalog = () => {
-  const { movieList, getMovies, loadingMore, genreFilter, sortBy } = useCatalog()
+  const { movieList, getMovies, loadingMore, genreFilter, topRating } = useCatalog()
 
   const [limit, setLimit] = useState(6);
   const [count, setCount] = useState(0)
@@ -60,8 +61,9 @@ export const Catalog = () => {
   // }
 
 
+
   return (
-    <>
+    <CatalogDiv>
       <CatalogHeader>
         <CatalogDot />
         <CatalogTitle><span>Catálogo</span> Completo</CatalogTitle>
@@ -70,31 +72,31 @@ export const Catalog = () => {
         <SelectGroup >
           <Group>
             <SelectFilter type='genre' />
-            <Button onClick={() => sortBy('vote_average.desc')} >mais populares</Button>
+            <Button onClick={() => topRating()} >mais populares</Button>
           </Group>
-          <SelectFilter type='list' className='list-type'/>
+          <SelectFilter type='list' className='list-type' />
         </SelectGroup>
         <CatalogList >
           {
             movieList.slice(0, limit).map((movie, index) => (
-            <Movie 
-              key={movie.id}
-              id={movie.id}
-              title={movie.title}
-              overview={movie.overview}
-              poster_path={movie.poster_path}
-              vote_average={movie.vote_average}
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                overview={movie.overview}
+                poster_path={movie.poster_path}
+                vote_average={movie.vote_average}
               //genre={movie.genreIds}
-            />
+              />
             ))
           }
 
-          <ButtonConatiner>
-            <Button onClick={changeLimit} >Carregar Mais</Button>
-          </ButtonConatiner>
         </CatalogList>
+        <ButtonConatiner>
+          <Button onClick={changeLimit} >Carregar Mais</Button>
+        </ButtonConatiner>
 
       </CatalogContainer>
-    </>
+    </CatalogDiv>
   )
 }

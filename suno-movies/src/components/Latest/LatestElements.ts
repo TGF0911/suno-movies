@@ -4,21 +4,30 @@ import { IoIosArrowForward,  IoIosArrowBack} from 'react-icons/io'
 import { Link } from 'react-router-dom';
 import { FaRegPlayCircle } from 'react-icons/fa';
 
-
-//Colocar backgound
-
 export const LatestContainer = styled.div`
+  width: 100%;
   margin-bottom: 2rem;
   display: block;
   justify-content: center;
+  background: url('../../assets/movie.jpg') no-repeat;
 `;
 
 export const LatestHeader = styled.div`
   margin-top: 4rem;
   margin-left: 22rem;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
+  @media screen and (max-width: 900px){
+    justify-content: center;
+  }
+  @media screen and (max-width: 1300px){
+    margin-left: 14rem;
+  }
 
+  @media screen and (max-width: 800px){
+    margin-left: 0;
+  }
 `
 
 export const LatestDot = styled.div`
@@ -27,6 +36,7 @@ export const LatestDot = styled.div`
   height: 0.7rem;
   background-color: #FE3189;
   border-radius: 50%;
+ 
 `
 
 export const LatestTitle = styled.h2`
@@ -69,7 +79,7 @@ export const CarouselInner = styled.ul`
 
  @media screen and (max-width: 400px){
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(1,1fr);
   }
 `
 
@@ -126,10 +136,10 @@ export const MovieDetails = styled.div`
 export const MovieTitle = styled(Link)`
   width: 12rem;
   color: #EAEAEA;
-  white-space: nowrap;
   font-size: 1.2rem;
   font-weight: 400;
   text-decoration: none;
+  white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 
@@ -142,6 +152,9 @@ export const MovieGenre = styled.p`
   font-size: 1rem;
   color: #FE3189;
   margin-top: 0.5rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `
 
 export const RatingContainer = styled.div`

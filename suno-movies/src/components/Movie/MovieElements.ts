@@ -95,7 +95,7 @@ export const DescriptionContainer = styled.div`
   color: #9F9FA0;
   font-size: 0.9rem;
   font-weight: 300;
-  text-align: justify;
+  text-align: left;
   text-overflow: clip ellipsis;
   direction: ltr;
   overflow: hidden;
