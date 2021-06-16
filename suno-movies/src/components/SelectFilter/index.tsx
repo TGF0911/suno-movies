@@ -18,8 +18,7 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
   const { genreFilter } = useCatalog()
   const [genre, setGenre] = useState<Genre[]>([])
   const [genreValue, setGenreValue] = useState(0)
-  
-
+  const [isGrid, setIsGrid] = useState('false')
 
   useEffect(() => {
     api.get('/genre/movie/list', {
@@ -39,17 +38,17 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
     <>
       {
         type === 'list' ? (
-          <Select className='list-type'>
-            <Option value='lista'>por lista</Option>
-            <Option value='grid'>por grid</Option>
+          <Select className='list-type' value={isGrid} onChange={e => {
+            setIsGrid(e.target.value)    
+          }}>
+            <Option value='false'>por lista</Option>
+            <Option value='true'>por grid</Option>
           </Select>
 
-        ) : type ==='genre' ? (
+        ) : (
           <Select value={genreValue} onChange={e => {
-            setGenreValue(Number(e.target.value))
-            
+            setGenreValue(Number(e.target.value))    
           }}>
-
             <Option value="" hidden>por genêro</Option>
             {
               genre.map(genre => (
@@ -57,12 +56,7 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
               ))
             }
           </Select>
-        ) : (
-          <Select>
-            <Option value='more'>mais populares</Option>
-            <Option value='less'>menos populares</Option>
-          </Select>
-        )
+        ) 
       }
     </>
   )

@@ -22,6 +22,7 @@ import {
   TrailerContainer
 } from './DetailsElements'
 import { Footer } from '../../components/Footer'
+import { SearchBar } from '../../components/SearchBar'
 
 type Movie = {
   id: number;
@@ -52,11 +53,8 @@ export default function Details() {
   const [movie, setMovie] = useState<Movie>()
   const [videos, setVideos] = useState<Video[]>([])
   const [genres, setGenres] = useState<string>()
-  const [isSearcBarOpen, setIsSearchBarOpen] = useState(false)
-
-  function toggle(){
-    setIsSearchBarOpen(!isSearcBarOpen)
-  }
+  const [isSearchBarOpen, setIsSearchBarOpen] = useState(false)
+  const [isBarsOpen, setIsBarsOpen] = useState(false)
 
   useEffect(() => {
     api.get(`/movie/${id}`, {
@@ -86,10 +84,18 @@ export default function Details() {
 
   }, [movie?.genres])
 
+  function toggle(){
+    setIsSearchBarOpen(!isSearchBarOpen)
+  }
+  function toggleBars(){
+    setIsBarsOpen(!isBarsOpen)
+  }
+
   return (
     <>
-      <Navbar toggle={toggle}/>
-      <DetailsContainer>
+      <Navbar toggle={toggle} toggleBar={toggleBars} isOpen={isBarsOpen}/>
+      <SearchBar toggle={toggle} isOpen={isSearchBarOpen}/> 
+      <DetailsContainer theme={{isSearchBarOpen, isBarsOpen}}>
 
         <MovieDetails>
           <MovieImage src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`} />

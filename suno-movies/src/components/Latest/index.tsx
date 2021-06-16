@@ -78,9 +78,9 @@ export const Latest = () => {
                 vote_average={movie.vote_average}
                 genre={movie.genre_ids}
                 isLatest={true}
+                isGrid={false}
               />
             ))
-            
           }
         </CarouselInner>
         <ArrowRigth onClick={nextCard} />

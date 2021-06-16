@@ -22,10 +22,16 @@ interface MovieProps {
   vote_average: number;
   overview?: string;
   isLatest: boolean;
+  isGrid: boolean;
 }
 
-export const Movie = ({ id, title, poster_path, genre, vote_average, overview, isLatest }: MovieProps) => {
-  const [genreList, setGenreList] = useState([])
+type Genre = {
+  id: number;
+  name: string;
+}
+
+export const Movie = ({ id, title, poster_path, genre, vote_average, overview, isLatest, isGrid }: MovieProps) => {
+  const [genreList, setGenreList] = useState<Genre[]>([])
 
   useEffect(() => {
     api.get('/genre/movie/list', {
@@ -34,14 +40,12 @@ export const Movie = ({ id, title, poster_path, genre, vote_average, overview, i
         language: 'pt-BR'
       }
     }).then(({ data }) => setGenreList(data.genres))
-    
   }, [])
 
-  function getGenre(){  
-    const names: string[] = []
-    genre.map(id => {
-      names.push()
-    })
+  function getGenres(){
+    const movie_genres = genre.map((id) => genreList.find(genre => genre.id === id)?.name)
+    const genresNames = movie_genres.join(', ')
+    return genresNames
   }
 
   return (
@@ -53,13 +57,13 @@ export const Movie = ({ id, title, poster_path, genre, vote_average, overview, i
         <img src={`https://image.tmdb.org/t/p/original/${poster_path}`} />
       </MovieImageContainer>
       <MovieInfo theme={{isLatest}}>
-        <MovieTitle to={`/movie/details/${id}`} theme={{isLatest}} >{title}</MovieTitle>
-        <MovieGenre theme={{isLatest}}>Comédia</MovieGenre>
+        <MovieTitle to={`/movie/details/${id}`} theme={{isLatest, isGrid}} >{title}</MovieTitle>
+        <MovieGenre theme={{isLatest, isGrid}}>{getGenres()}</MovieGenre>
         <RatingContainer>
           <RatingStar />
           <MovieRating>{vote_average}</MovieRating>
         </RatingContainer>
-        <DescriptionContainer theme={{isLatest}} >
+        <DescriptionContainer theme={{isLatest, isGrid}} >
           <p>{overview}</p>
         </DescriptionContainer>
       </MovieInfo>

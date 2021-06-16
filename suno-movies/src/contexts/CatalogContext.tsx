@@ -3,7 +3,7 @@ import { api, apiKey } from '../service/api'
 
 //https://api.themoviedb.org/3/movie/now_playing?api_key=72f312d31dcf31a78d76ad78681ea28a&language=pt-BR
 
-interface CatalogContextPorps {
+interface CatalogContextProps {
   children: ReactNode;
 }
 
@@ -27,7 +27,7 @@ type CatalogContextData = {
 
 const CatalogContext = createContext({} as CatalogContextData)
 
-export function CatalogProvider({ children }: CatalogContextPorps) {
+export function CatalogProvider({ children }: CatalogContextProps) {
 
   const [page, setPage] = useState(1)
   const [movieList, setMovieList] = useState<Movie[]>([])

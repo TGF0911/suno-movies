@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { NavLink as Link } from 'react-router-dom'
+import { Link as ScrollLink } from 'react-scroll'
 import { GoSearch } from 'react-icons/go'
 import { FaBars } from 'react-icons/fa';
+import { IoClose } from 'react-icons/io5';
 
 export const Nav = styled.nav`
   /* background-color: #212125; */
@@ -11,13 +13,8 @@ export const Nav = styled.nav`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  z-index: 10;
-
 
   box-shadow: 0px 4px 25px 4px rgba(0, 0, 0, 0.3);
-
-  @media screen and (max-width: 830px){
-  }
 `;
 
 export const NavLogo = styled.h1`
@@ -42,7 +39,12 @@ export const NavLinkContainer = styled.div`
   }
 
   @media screen and (max-width: 830px){
-    display: none;
+    display: ${props => props.theme.isOpen ? 'block' : 'none'};
+    width: ${props => props.theme.isOpen && '100vw'};
+    height: ${props => props.theme.isOpen && '100vh'};
+    margin-top: ${props => props.theme.isOpen && '8rem'};
+    z-index: 999;
+    transition: 0.3s ease-in ease;
   }
 
 `
@@ -57,16 +59,18 @@ export const NavLink = styled(Link)`
   display: flex;
   cursor: pointer;
 
-  .search{
-    display: ${props => props.theme.isOpen ? 'block' : 'none'};
-  }
+`
 
+export const LinkScroll = styled(ScrollLink)`
+  color: #fff;
+  margin: 2rem 3rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+  display: flex;
+  cursor: pointer;
 
-  @media screen and (max-width: 400px){
-    position: absolute;
-    top: 10px;
-    left: 25px;
-  }
 `
 
 export const Bars = styled(FaBars)`
@@ -78,14 +82,14 @@ export const Bars = styled(FaBars)`
     display: flex;
   }
 `
-
-export const NavIcon = styled.div`
-  display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: pointer;
+export const CloseIcon = styled(IoClose)`
+  display: none;
+  font-size: 5rem;
   color: #fff;
+
+  @media screen and (max-width : 830px){
+    display: flex;
+  }
 `
 
 export const SearchIcon = styled(GoSearch)`

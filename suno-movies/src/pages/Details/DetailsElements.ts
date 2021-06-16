@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import { AiFillStar } from 'react-icons/ai'
 import {Link} from 'react-router-dom'
+import backImg from '../../assets/movie.jpg'
 
 export const DetailsContainer = styled.div`
   margin: 5rem calc((100vw - 1000px) /2);
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  filter: ${props => props.theme.isBarsOpen | props.theme.isSearchBarOpen && 'opacity(0.1)'};
+  background-image: url(${backImg}) no-repeat ;
   @media screen and (max-width: 1700px){
     margin: 1rem 10rem;
   }

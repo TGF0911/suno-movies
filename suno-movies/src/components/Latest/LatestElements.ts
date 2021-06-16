@@ -8,9 +8,7 @@ export const LatestContainer = styled.div`
   margin-bottom: 2rem;
   display: block;
   justify-content: center;
-  background: url(${backImg}) no-repeat;
-
-  
+  background-image: url(${backImg}) no-repeat ;
 `;
 
 export const LatestHeader = styled.div`

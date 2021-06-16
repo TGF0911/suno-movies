@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useCatalog } from '../../contexts/CatalogContext'
-import { api, apiKey } from '../../service/api'
 import { Movie } from '../Movie'
 import { SelectFilter } from '../SelectFilter'
 
@@ -20,10 +18,11 @@ import {
 } from './CatalogElements'
 
 export const Catalog = () => {
-  const { movieList, getMovies, loadingMore, genreFilter, topRating } = useCatalog()
+  const { movieList, getMovies, loadingMore, topRating } = useCatalog()
 
   const [limit, setLimit] = useState(6);
   const [count, setCount] = useState(0)
+  const [isGrid, setIsGrid] = useState(true)
 
   useEffect(() => {
     getMovies()
@@ -40,7 +39,7 @@ export const Catalog = () => {
 
 
   return (
-    <CatalogDiv>
+    <CatalogDiv id='catalog'>
       <CatalogHeader>
         <CatalogDot />
         <CatalogTitle><span>Catálogo</span> Completo</CatalogTitle>
@@ -51,9 +50,9 @@ export const Catalog = () => {
             <SelectFilter type='genre' />
             <Button onClick={() => topRating()} >mais populares</Button>
           </Group>
-          <SelectFilter type='list' className='list-type' />
+          <SelectFilter type='list' className="list-type"/>
         </SelectGroup>
-        <CatalogList >
+        <CatalogList theme={{isGrid}}>
           {
             movieList.slice(0, limit).map((movie, index) => (
               <Movie
@@ -65,13 +64,14 @@ export const Catalog = () => {
                 vote_average={movie.vote_average}
                 genre={movie.genre_ids}
                 isLatest={false}
+                isGrid={isGrid}
               />
             ))
           }
 
         </CatalogList>
         <ButtonConatiner>
-          <Button onClick={changeLimit} >Carregar Mais</Button>
+          <Button onClick={changeLimit} className='loading' >Carregar Mais</Button>
         </ButtonConatiner>
 
       </CatalogContainer>

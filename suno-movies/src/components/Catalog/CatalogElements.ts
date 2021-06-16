@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-interface CatalogListProps{
-  isList: boolean;
-}
-
 export const CatalogDiv = styled.div`
   margin-top: 3rem;
 `
@@ -53,8 +49,7 @@ export const CatalogTitle = styled.h2`
 //Mudar margin - 800px
 export const CatalogContainer = styled.div`
   margin: 2rem 12rem;
-  width: calc(100vw - 250px);
-  display: block;
+  width: calc(100vw - 300px);
   justify-content: center;
 
   @media screen and (max-width: 1200px){
@@ -62,7 +57,7 @@ export const CatalogContainer = styled.div`
   }
 
   @media screen and (max-width: 800px){
-    margin: 4rem 2rem;
+    margin: 4rem 1rem;
   }
 `
 
@@ -91,12 +86,12 @@ export const Group = styled.div`
 `
 
 export const CatalogList = styled.ul`
-  margin: 5rem calc((100vw - 1500px) /2);
+  margin: 5rem ${props => (props.theme.isGrid && 'calc((100vw - 1500px) /2)')};
   list-style: none;
 
-  display: grid;
-  grid-gap: 2fr;
-  grid-template-columns: repeat(2, 1fr);
+  display: ${props => props.theme.isGrid && 'grid'};
+  grid-gap:${props => props.theme.isGrid && ' 2fr'};
+  grid-template-columns: ${props => props.theme.isGrid && 'repeat(2, 1fr)'};
 
   @media screen and (max-width: 1300px){
     margin: 0 3rem;
@@ -114,6 +109,13 @@ export const ButtonConatiner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 800px){
+    margin: 10rem 0;
+    .loading{
+      margin-left: 4rem;
+    }
+  }  
 `
 
 export const Button = styled.div`
@@ -140,6 +142,6 @@ export const Button = styled.div`
   @media screen and (max-width: 1000px){
     width: 12rem;
     height: 4rem;
-    font-size: 1.2rem;
+    font-size: 1.2rem;  
   }
 `

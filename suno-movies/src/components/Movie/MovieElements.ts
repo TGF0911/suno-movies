@@ -10,7 +10,7 @@ export const MovieCard = styled.li`
   width: ${props => (props.theme.isLatest && '15rem')};
   height: ${props => (props.theme.isLatest && '20rem')};
   display: flex;
-  flex-direction: ${props => (props.theme.isLatest ? 'column' : 'row' )};
+  flex-direction: ${props => (props.theme.isLatest ? 'column' : 'row')};
   align-items: ${props => (props.theme.isLatest && 'flex-start')};
   margin-bottom: 3rem;
   `
@@ -60,6 +60,7 @@ export const MovieInfo = styled.div`
 
 export const MovieTitle = styled(Link)`
   width: ${props => (props.theme.isLatest && '12rem')};
+  width: ${props => (!props.theme.isGrid && '50rem')};
   color: #EAEAEA;
   font-size: ${props => (props.theme.isLatest ? '1.2rem' : '1.5rem')};
   font-weight: 400;
@@ -70,9 +71,18 @@ export const MovieTitle = styled(Link)`
   :hover{
     text-decoration: underline;
   }
+
+  @media screen and (max-width: 1300px){
+    width: ${props => (!props.theme.isGrid && '30rem')};
+  }
+
+  @media screen and (max-width: 800px){
+    width: ${props => (!props.theme.isGrid && '16rem')};
+  }
 `
 
 export const MovieGenre = styled.p`
+  width: ${props => (props.theme.isGrid ? '12rem' : '30rem')};
   font-size: 1.2rem;
   color: #FE3189;
   margin-top: 0.5rem;
@@ -80,6 +90,14 @@ export const MovieGenre = styled.p`
   white-space: ${props => (props.theme.isLatest && 'nowrap')};
   text-overflow: ${props => (props.theme.isLatest && 'ellipsis')};
   overflow: ${props => (props.theme.isLatest && 'hidden')};
+
+  @media screen and (max-width: 1300px){
+    width: ${props => (!props.theme.isGrid && '30rem')};
+  }
+
+  @media screen and (max-width: 800px){
+    width: ${props => (!props.theme.isGrid && '16rem')};
+  }
 `
 
 export const RatingContainer = styled.div`
@@ -102,12 +120,12 @@ export const MovieRating = styled.p`
   margin-left: 10px;
 `
 export const DescriptionContainer = styled.div`
-  display: ${props => (props.theme.isLatest && 'none' )};
+  display: ${props => (props.theme.isLatest && 'none')};
   text-overflow: clip ellipsis;
   p{
   margin-top: 1rem;
-  height: 8rem;
-  width: 16rem;
+  height: 7rem;
+  width: ${props => (props.theme.isGrid ? '18rem' : '50rem')};
   color: #9F9FA0;
   font-size: 0.9rem;
   font-weight: 300;
@@ -115,5 +133,13 @@ export const DescriptionContainer = styled.div`
 
   direction: ltr;
   overflow: hidden;
+  @media screen and (max-width: 1300px){
+    width: ${props => (!props.theme.isGrid && '20rem')};
+  }
+
+  @media screen and (max-width: 800px){
+    width: ${props => (!props.theme.isGrid && '14rem')};
+  }
+  
   }
 `

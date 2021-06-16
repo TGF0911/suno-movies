@@ -10,7 +10,7 @@ export const SearcContainer = styled.div`
   border-radius: 30px;
   box-shadow: 0px 4px 25px 4px rgba(0, 0, 0, 0.3);
   transition: .4s;
-  display: flex;
+  display: ${props => props.theme.isOpen ? 'flex' : 'none'};
   flex-direction: column;
   z-index: 999;
   transition: 0.3s ease-in ease;
@@ -18,7 +18,8 @@ export const SearcContainer = styled.div`
 
   margin-top: 6rem;
 
-  top: ${props => props.theme.isOpen ? '0' : '1000px'};
+  top: ${props => props.theme.isOpen && '0'};
+
 `
 
 export const SearchText = styled.p`
@@ -31,6 +32,10 @@ export const SearchText = styled.p`
 export const Search = styled.form`
   background-color: #212125;
   padding: 2rem 6rem;
+
+  @media screen and (max-width: 800px){
+    padding: 1rem 2rem;
+  }
 `
 
 export const SearchInput = styled.input`
@@ -47,6 +52,11 @@ export const SearchInput = styled.input`
   font-weight: 500;
   font-size: 2rem;
   line-height: 4rem;
+
+  @media screen and (max-width: 800px){
+    width: 500px;
+    margin: 1rem 0;
+  }
 `
 export const SearchList = styled.div`
   padding: 0 8rem ;
