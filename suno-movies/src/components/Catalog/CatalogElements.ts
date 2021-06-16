@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface CatalogListProps{
+  isList: boolean;
+}
+
 export const CatalogDiv = styled.div`
   margin-top: 3rem;
 `
@@ -46,7 +50,7 @@ export const CatalogTitle = styled.h2`
     font-weight: 600;
   }
 `
-
+//Mudar margin - 800px
 export const CatalogContainer = styled.div`
   margin: 2rem 12rem;
   width: calc(100vw - 250px);
@@ -55,6 +59,10 @@ export const CatalogContainer = styled.div`
 
   @media screen and (max-width: 1200px){
     margin: 4rem 6rem;
+  }
+
+  @media screen and (max-width: 800px){
+    margin: 4rem 2rem;
   }
 `
 
@@ -92,7 +100,7 @@ export const CatalogList = styled.ul`
 
   @media screen and (max-width: 1300px){
     margin: 0 3rem;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
   }
 
   @media screen and (max-width: 800px){

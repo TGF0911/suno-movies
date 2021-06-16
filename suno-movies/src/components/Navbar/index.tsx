@@ -1,11 +1,12 @@
-import { SearchBar } from '../SearchBar'
 import { Nav, NavLink, SearchIcon, NavLogo, NavLinkContainer, Bars } from './NavbarElements'
 
-export const Navbar = () => {
+interface NavBar{
+  toggle : () => void;
+}
+
+export const Navbar = ({toggle} : NavBar) => {
   //Colocar o link para o catálogo (Scroll na página)
-  function search(){ //Fazer isso funcionar
-    return <SearchBar />
-  }
+
 
   return (
     <>
@@ -16,7 +17,8 @@ export const Navbar = () => {
           <NavLink to="/">Início</NavLink>
           <NavLink to="/">Catálogo</NavLink> 
         </NavLinkContainer>
-          <SearchIcon onClick={search} />
+         <SearchIcon onClick={toggle} />
+         
       </Nav>
     </>
   )

@@ -23,12 +23,16 @@ type Movie = {
   vote_average: number;
 }
 
-export const SearchBar = () => {
+interface SearchProps {
+  toggle: () => void;
+  isOpen: boolean;
+}
+
+export const SearchBar = ({isOpen} : SearchProps) => {
   const [searchMovie, setSearchMovies] = useState<Movie[]>([])
   const [searchValue, setSearchValue] = useState('')
-  const [isOpen, setIsOpen] = useState(false)
 
-  //Talvez precise de mais um icone pra enviar a requisiçaĩo
+
   async function searchMovies(searchValue: string , e : FormEvent) {
     e.preventDefault()
     const { data } = await api.get('/search/movie/', {
@@ -46,19 +50,8 @@ export const SearchBar = () => {
     setSearchMovies(data.results)
   }
 
-  function toggle() {
-    setIsOpen(!isOpen)
-  }
-
-  function onKeyUp(e : KeyboardEvent){
-    if(e.key === 'Enter'){
-      //setSearchValue(e.target)
-    }
-  }
-
-
   return (
-    <SearcContainer  >
+    <SearcContainer theme={{isOpen}}>
       <Search onSubmit={(e) => searchMovies(searchValue, e)}>
         <SearchInput value={searchValue} onChange={e => setSearchValue(e.target.value)}  />
       </Search>

@@ -7,14 +7,9 @@ interface CatalogContextPorps {
   children: ReactNode;
 }
 
-type Genre = {
-  id: number;
-  name: string;
-}
-
 type Movie = {
   id: number;
-  genreIds: number[];
+  genre_ids: number[];
   poster_path: string;
   overview: string;
   title: string;
@@ -28,7 +23,6 @@ type CatalogContextData = {
   loadingMore: () => void;
   topRating: () => void;
   genreFilter: (genresId: number) => void;
-  sortBy: (sortType: string) => void;
 }
 
 const CatalogContext = createContext({} as CatalogContextData)
@@ -37,7 +31,7 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
 
   const [page, setPage] = useState(1)
   const [movieList, setMovieList] = useState<Movie[]>([])
-  const [isFilter, setIsFilter] = useState(false)
+  const [url, setUrl] = useState([''])
 
   async function getMovies() {
     const { data } = await api.get('/movie/popular', {
@@ -49,6 +43,7 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
 
     setMovieList(data.results)
     setPage(data.page)
+    setUrl(['/movie/popular'])
   }
 
   async function topRating() {
@@ -60,54 +55,30 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
     })
     setMovieList(data.results)
     setPage(data.page)
+    setUrl(['/movie/top_rated'])
   }
 
-  ////discover/movie
-  //vote_average.desc
-  async function sortBy(sortType: string) {
-    if (isFilter) {
-      const { data } = await api.get('/discover/movie', {
-        params: {
-          api_key: apiKey,
-          language: 'pt-BR',
-          sort_by: sortType,
-        }
-      })
-      setMovieList(data.results)
-    } else {
-      const { data } = await api.get('/discover/movie', {
-        params: {
-          api_key: apiKey,
-          language: 'pt-BR',
-          sort_by: sortType,
-        }
-      })
-      setMovieList(data.results)
-      setPage(data.page)
-    }
-  }
 
-  async function genreFilter(genderId: number) {
+  async function genreFilter(genreId: number) {
     const { data } = await api.get('/discover/movie', {
       params: {
         api_key: apiKey,
         language: 'pt-BR',
-        with_genres: genderId,
+        with_genres: genreId,
       }
     })
     setMovieList(data.results)
     setPage(data.page)
-    setIsFilter(true)
+    setUrl(['/discover/movie', String(genreId)])
   }
 
-  //Mandar a url como parametro - talvez com um estado e um if na function do Catalog
-  //Pensar mais sobre a page (Talvez precise ser mandado como parametro também)
   async function loadingMore() {
-    const { data } = await api.get('/movie/popular', {
+    const { data } = await api.get(url[0], {
       params: {
         api_key: apiKey,
         language: 'pt-BR',
-        page: page + 1
+        page: page + 1,
+        with_genres: url[1] || ''
       }
     })
     setMovieList([...movieList, ...data.results])
@@ -122,7 +93,6 @@ export function CatalogProvider({ children }: CatalogContextPorps) {
       getMovies,
       loadingMore,
       genreFilter,
-      sortBy,
       topRating
     }}>
       {children}

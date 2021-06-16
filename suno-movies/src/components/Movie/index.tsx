@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+import { api, apiKey } from "../../service/api"
 import {
   MovieCard,
   DescriptionContainer,
@@ -16,29 +18,48 @@ interface MovieProps {
   id: number;
   title: string;
   poster_path: string;
-  //genre:string;
+  genre: number[];
   vote_average: number;
-  overview: string;
+  overview?: string;
+  isLatest: boolean;
 }
 
-export const Movie = ({ id, title, poster_path, vote_average, overview }: MovieProps) => {
+export const Movie = ({ id, title, poster_path, genre, vote_average, overview, isLatest }: MovieProps) => {
+  const [genreList, setGenreList] = useState([])
+
+  useEffect(() => {
+    api.get('/genre/movie/list', {
+      params: {
+        api_key: apiKey,
+        language: 'pt-BR'
+      }
+    }).then(({ data }) => setGenreList(data.genres))
+    
+  }, [])
+
+  function getGenre(){  
+    const names: string[] = []
+    genre.map(id => {
+      names.push()
+    })
+  }
 
   return (
-    <MovieCard  >
-      <MovieImageContainer>
-        <PlayLinkContainer to={`/movie/details/${id}`} className='play'>
+    <MovieCard theme={{isLatest}} >
+      <MovieImageContainer theme={{isLatest}}>
+        <PlayLinkContainer to={`/movie/details/${id}`} className='play' theme={{isLatest}}>
           <PlayLink />
-        </PlayLinkContainer>
+        </PlayLinkContainer >
         <img src={`https://image.tmdb.org/t/p/original/${poster_path}`} />
       </MovieImageContainer>
-      <MovieInfo>
-        <MovieTitle to={`/movie/details/${id}`}>{title}</MovieTitle>
-        <MovieGenre>Comédia</MovieGenre>
+      <MovieInfo theme={{isLatest}}>
+        <MovieTitle to={`/movie/details/${id}`} theme={{isLatest}} >{title}</MovieTitle>
+        <MovieGenre theme={{isLatest}}>Comédia</MovieGenre>
         <RatingContainer>
           <RatingStar />
           <MovieRating>{vote_average}</MovieRating>
         </RatingContainer>
-        <DescriptionContainer>
+        <DescriptionContainer theme={{isLatest}} >
           <p>{overview}</p>
         </DescriptionContainer>
       </MovieInfo>

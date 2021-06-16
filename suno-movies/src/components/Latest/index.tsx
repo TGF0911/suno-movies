@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { api, apiKey } from "../../service/api"
+import { Movie } from "../Movie"
 import {
   Carousel,
   CarouselInner,
@@ -7,24 +8,13 @@ import {
   LatestDot,
   LatestHeader,
   LatestTitle,
-  MovieCard,
-  MovieTitle,
-  MovieRating,
-  MovieDetails,
-  MovieImage,
-  RatingContainer,
-  RatingStar,
   ArrowRigth,
   ArrowLeft,
-  MovieImageContainer,
-  PlayLinkContainer,
-  PlayLink,
-  MovieGenre
 } from "./LatestElements"
 
 interface Movie {
   id: number;
-  genreIds: number[];
+  genre_ids: number[];
   poster_path: string;
   overview: string;
   title: string;
@@ -80,23 +70,17 @@ export const Latest = () => {
         <CarouselInner>
           {
             latestList.slice(activeIndex, limit).map(movie => (
-              <MovieCard key={movie.id}>
-                <MovieImageContainer>
-                  <PlayLinkContainer to={`/movie/details/${movie.id}`} className='play'>
-                    <PlayLink />
-                  </PlayLinkContainer>
-                  <MovieImage src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} />
-                </MovieImageContainer>
-                <MovieDetails>
-                  <MovieTitle to={`/movie/details/${movie.id}`}>{movie.title}</MovieTitle>
-                  <MovieGenre>Comédia</MovieGenre>
-                  <RatingContainer>
-                    <RatingStar />
-                    <MovieRating>{movie.vote_average}</MovieRating>
-                  </RatingContainer>
-                </MovieDetails>
-              </MovieCard>
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                title={movie.title}
+                poster_path={movie.poster_path}
+                vote_average={movie.vote_average}
+                genre={movie.genre_ids}
+                isLatest={true}
+              />
             ))
+            
           }
         </CarouselInner>
         <ArrowRigth onClick={nextCard} />

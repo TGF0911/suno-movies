@@ -57,6 +57,11 @@ export const NavLink = styled(Link)`
   display: flex;
   cursor: pointer;
 
+  .search{
+    display: ${props => props.theme.isOpen ? 'block' : 'none'};
+  }
+
+
   @media screen and (max-width: 400px){
     position: absolute;
     top: 10px;

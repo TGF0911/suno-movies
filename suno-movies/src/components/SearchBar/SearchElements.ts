@@ -3,14 +3,22 @@ import { AiFillStar } from 'react-icons/ai'
 import {Link} from 'react-router-dom'
 
 export const SearcContainer = styled.div`
+  position: absolute;
   width: 100%;
   height: 10rem;
   background-color: #212125;
+  border-radius: 30px;
   box-shadow: 0px 4px 25px 4px rgba(0, 0, 0, 0.3);
-  /* background: rgba(24, 24, 28, 0.95); */
   transition: .4s;
   display: flex;
   flex-direction: column;
+  z-index: 999;
+  transition: 0.3s ease-in ease;
+  
+
+  margin-top: 6rem;
+
+  top: ${props => props.theme.isOpen ? '0' : '1000px'};
 `
 
 export const SearchText = styled.p`
@@ -49,11 +57,11 @@ export const SearchList = styled.div`
   align-items: center;
   justify-content: center;
 
-  /* @media screen and (max-width: 400px){
+  @media screen and (max-width: 400px){
     display: flex;
     flex-direction: column;
     margin: 2rem;
-  } */
+  }
 `
 
 export const MovieCard = styled.div`

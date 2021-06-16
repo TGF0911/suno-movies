@@ -52,6 +52,11 @@ export default function Details() {
   const [movie, setMovie] = useState<Movie>()
   const [videos, setVideos] = useState<Video[]>([])
   const [genres, setGenres] = useState<string>()
+  const [isSearcBarOpen, setIsSearchBarOpen] = useState(false)
+
+  function toggle(){
+    setIsSearchBarOpen(!isSearcBarOpen)
+  }
 
   useEffect(() => {
     api.get(`/movie/${id}`, {
@@ -83,7 +88,7 @@ export default function Details() {
 
   return (
     <>
-      <Navbar />
+      <Navbar toggle={toggle}/>
       <DetailsContainer>
 
         <MovieDetails>
