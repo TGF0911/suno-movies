@@ -4,6 +4,7 @@ import { Catalog } from '../../components/Catalog';
 import { Latest } from '../../components/Latest';
 import { Footer } from '../../components/Footer';
 import { SearchBar } from '../../components/SearchBar';
+import { LinkScroll, Menu, NavLink } from '../../components/Navbar/NavbarElements';
 
 export default function Home() {
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false)
@@ -19,11 +20,15 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar toggle={toggle} toggleBar={toggleBars} isOpen={isBarsOpen} />
+      <Navbar toggle={toggle} toggleBar={toggleBars} isOpen={isBarsOpen} isSearchBarOpen={isSearchBarOpen}/>
       <SearchBar toggle={toggle} isOpen={isSearchBarOpen} />
-        <Latest />
-        <Catalog />
-        <Footer />
+      <Menu theme={{ isBarsOpen }}>
+        <NavLink to="/">Início</NavLink>
+        <LinkScroll smooth={true} to='catalog'>Catálogo</LinkScroll>
+      </Menu>
+      <Latest />
+      <Catalog />
+      <Footer />
     </div>
   )
 }

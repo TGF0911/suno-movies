@@ -9,11 +9,11 @@ import {
   MovieTitle,
   RatingContainer,
   RatingStar,
-  SearcContainer,
+  SearchContainer,
   Search,
   SearchInput,
   SearchList,
-  SearchText
+  SearchText 
 } from "./SearchElements";
 
 type Movie = {
@@ -44,14 +44,14 @@ export const SearchBar = ({isOpen} : SearchProps) => {
     })
     if (data.results.length === 0) {
       return (
-        <SearchText>Não encontamos nenhum filme com este nome. Tente novamente.</SearchText>
+        <SearchText>Não encontramos nenhum filme com este nome. Tente novamente.</SearchText>
       )
     }
     setSearchMovies(data.results)
   }
 
   return (
-    <SearcContainer theme={{isOpen}}>
+    <SearchContainer theme={{isOpen}}>
       <Search onSubmit={(e) => searchMovies(searchValue, e)}>
         <SearchInput value={searchValue} onChange={e => setSearchValue(e.target.value)}  />
       </Search>
@@ -75,6 +75,6 @@ export const SearchBar = ({isOpen} : SearchProps) => {
         }
       </SearchList>
 
-    </SearcContainer>
+    </SearchContainer>
   )
 }

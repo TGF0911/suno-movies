@@ -93,10 +93,10 @@ export default function Details() {
 
   return (
     <>
-      <Navbar toggle={toggle} toggleBar={toggleBars} isOpen={isBarsOpen}/>
+      <Navbar toggle={toggle} toggleBar={toggleBars} isOpen={isBarsOpen} isSearchBarOpen={isSearchBarOpen}/>
       <SearchBar toggle={toggle} isOpen={isSearchBarOpen}/> 
       <DetailsContainer theme={{isSearchBarOpen, isBarsOpen}}>
-
+     
         <MovieDetails>
           <MovieImage src={`https://image.tmdb.org/t/p/original/${movie?.poster_path}`} />
           <MovieInfoGroup>
@@ -113,7 +113,7 @@ export default function Details() {
             <MovieDescription>{movie?.overview}</MovieDescription>
           </MovieInfoGroup>
         </MovieDetails>
-
+       
         <TrailerContainer>
           <h4>Trailer</h4>
           <hr />

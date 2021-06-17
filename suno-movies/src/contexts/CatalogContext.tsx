@@ -1,8 +1,6 @@
 import { createContext, ReactNode, useState, useContext } from 'react'
 import { api, apiKey } from '../service/api'
 
-//https://api.themoviedb.org/3/movie/now_playing?api_key=72f312d31dcf31a78d76ad78681ea28a&language=pt-BR
-
 interface CatalogContextProps {
   children: ReactNode;
 }
@@ -81,6 +79,7 @@ export function CatalogProvider({ children }: CatalogContextProps) {
         api_key: apiKey,
         language: 'pt-BR',
         page: page + 1,
+        sort_by : url[1] || '',
         with_genres: url[1] || ''
       }
     })

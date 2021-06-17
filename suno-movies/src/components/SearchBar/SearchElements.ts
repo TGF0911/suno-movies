@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { AiFillStar } from 'react-icons/ai'
 import {Link} from 'react-router-dom'
 
-export const SearcContainer = styled.div`
+export const SearchContainer = styled.div`
   position: absolute;
   width: 100%;
   height: 10rem;
@@ -80,7 +80,6 @@ export const MovieCard = styled.div`
   width: 24rem;
   height: 14rem;
   background-color: #252529;
-  /* background-color: #EAEAEA; */
   border: 1px solid #313136; 
   border-radius: 4px;
   display: flex;

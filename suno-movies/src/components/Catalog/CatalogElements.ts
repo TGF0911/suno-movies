@@ -46,7 +46,7 @@ export const CatalogTitle = styled.h2`
     font-weight: 600;
   }
 `
-//Mudar margin - 800px
+
 export const CatalogContainer = styled.div`
   margin: 2rem 12rem;
   width: calc(100vw - 300px);
@@ -103,7 +103,7 @@ export const CatalogList = styled.ul`
   }
 `
 
-export const ButtonConatiner = styled.div`
+export const ButtonContainer = styled.div`
   margin: 6rem 0;
   margin-right: 5rem;
   display: flex;

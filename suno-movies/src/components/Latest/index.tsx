@@ -28,13 +28,14 @@ export const Latest = () => {
   const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
-    api.get('/movie/now_playing', {
+    api.get('/discover/movie', {
       params: {
         api_key: apiKey,
         language: 'pt-BR',
+        sort_by : 'release_date.desc',
+        include_adult :'false'
       }
     }).then(({ data }) => setLatestList(data.results))
-    console.log(latestList)
   }, [])
 
 

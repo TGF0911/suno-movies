@@ -6,7 +6,6 @@ import { FaBars } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 
 export const Nav = styled.nav`
-  /* background-color: #212125; */
   padding: 0.5rem calc((100vw - 1400px)/ 2 ) ;
   width: 100vw;
   height: 90px;
@@ -35,14 +34,23 @@ export const NavLinkContainer = styled.div`
   align-items: center;
 
   @media screen and (max-width: 830px){
-    display: ${props => props.theme.isOpen ? 'block' : 'none'};
-    width: ${props => props.theme.isOpen && '100%'};
-    height: ${props => props.theme.isOpen && '20rem'};
-    margin-top: ${props => props.theme.isOpen && '0'};
-    z-index: 999;
-    transition: 0.3s ease-in ease;
+   display: none;
   }
 
+`
+
+export const Menu = styled.div`
+     margin-top: 1rem;
+     transition: .4s;
+    display: ${props => props.theme.isBarsOpen ? 'block' : 'none'};
+    width: ${props => props.theme.isBarsOpen && '100%'};
+    height: ${props => props.theme.isBarsOpen && '10rem'};
+    left: ${props => props.theme.isBarsOpen && '0'};
+    box-shadow: 0px 4px 25px 4px rgba(0, 0, 0, 0.3);
+    align-items: center;
+    z-index: 999;
+    transition: 0.3s ease-in ease;
+    position: absolute;
 `
 
 export const NavLink = styled(Link)`
@@ -86,8 +94,8 @@ export const Bars = styled(FaBars)`
   }
 `
 export const CloseIcon = styled(IoClose)`
-  display: none;
-  font-size: 5rem;
+  display: ${props => props.theme.isSearchBarOpen ? 'flex' : 'none'};
+  font-size: 3rem;
   color: #fff;
 
   @media screen and (max-width : 830px){

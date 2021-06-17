@@ -56,15 +56,18 @@ export const Carousel = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: 800px){
+  display: none;
+  }
 `
 export const ArrowLeft = styled(IoIosArrowBack)`
-  margin-right: 3rem;
-  font-size: 3rem;
+  font-size: 80px;
   color: #fff;
 `
 
 export const ArrowRight = styled(IoIosArrowForward)`
-  font-size: 3rem;
+  font-size: 80px;
   color: #fff;
 `
 
@@ -76,8 +79,5 @@ export const CarouselInner = styled.ul`
 
  transition: transform 0.3s;
 
- @media screen and (max-width: 400px){
-  display: grid;
-  grid-template-columns: repeat(1,1fr);
-  }
+
 `

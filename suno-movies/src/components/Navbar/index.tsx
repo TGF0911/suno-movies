@@ -14,20 +14,20 @@ interface NavBar {
   toggle: () => void;
   toggleBar: () => void;
   isOpen: boolean;
+  isSearchBarOpen : boolean;
 }
 
-export const Navbar = ({ toggle, isOpen, toggleBar }: NavBar) => {
-  //Colocar o link para o catálogo (Scroll na página)
+export const Navbar = ({ toggle, isOpen, toggleBar, isSearchBarOpen }: NavBar) => {
   return (
     <>
       <Nav>
         {isOpen ? <CloseIcon onClick={toggleBar} /> : <Bars onClick={toggleBar}/>}
         <NavLogo>Suno<span>Movies</span></NavLogo>
-        <NavLinkContainer theme={{ isOpen }}>
+        <NavLinkContainer>
           <NavLink to="/">Início</NavLink>
           <LinkScroll smooth={true} to='catalog'>Catálogo</LinkScroll>
         </NavLinkContainer>
-        <SearchIcon onClick={toggle} />
+        {isSearchBarOpen ? <CloseIcon onClick={toggle} theme={{isSearchBarOpen}} /> : <SearchIcon onClick={toggle}/>}
       </Nav>
     </>
   )

@@ -32,7 +32,11 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
   }, [genreValue])
 
   useEffect(() => {
-    changeListType(Boolean(isGrid))
+    if(isGrid === 'true'){
+      changeListType(true)
+    }else {
+      changeListType(false)
+    }
   }, [isGrid])
 
 
@@ -51,7 +55,7 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
           <Select value={genreValue} onChange={e => {
             setGenreValue(Number(e.target.value))
           }}>
-            <Option value="" hidden>por genêro</Option>
+            <Option hidden>por gênero</Option>
             {
               genre.map(genre => (
                 <Option key={genre.id} value={genre.id} >{genre.name}</Option>

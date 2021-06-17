@@ -9,7 +9,7 @@ import {
   CatalogTitle,
   CatalogContainer,
   CatalogList,
-  ButtonConatiner,
+  ButtonContainer,
   SelectGroup,
   Button,
   Group,
@@ -68,9 +68,9 @@ export const Catalog = () => {
           }
 
         </CatalogList>
-        <ButtonConatiner>
+        <ButtonContainer>
           <Button onClick={changeLimit} className='loading' >Carregar Mais</Button>
-        </ButtonConatiner>
+        </ButtonContainer>
 
       </CatalogContainer>
     </CatalogDiv>

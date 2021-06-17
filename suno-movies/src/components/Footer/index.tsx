@@ -1,4 +1,4 @@
-import { FooterContainer, FooterText } from "./FooterElemets"
+import { FooterContainer, FooterText } from "./FooterElements"
 
 export const Footer = () => {
   return (

@@ -9,7 +9,7 @@ export const DetailsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   filter: ${props => props.theme.isBarsOpen | props.theme.isSearchBarOpen && 'opacity(0.1)'};
-  background-image: url(${backImg}) no-repeat ;
+  background: url(${backImg});
   @media screen and (max-width: 1700px){
     margin: 1rem 10rem;
   }
@@ -25,7 +25,6 @@ export const MovieDetails = styled.div`
   display: flex;
   justify-content: space-evenly;
 
-  background: url('../../assets/section 1.jpg');
 
   @media screen and (max-width: 800px){
     display: block;
@@ -143,8 +142,6 @@ position: relative;
     width: 100%;
     height: 100%;
   }
-
-  
 `
 
 export const ButtonContainer = styled.div`
