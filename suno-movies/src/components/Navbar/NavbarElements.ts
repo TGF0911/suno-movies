@@ -34,15 +34,11 @@ export const NavLinkContainer = styled.div`
   margin: 2rem 3rem;
   align-items: center;
 
-  &.active{
-    border-bottom: 2px solid #FE3189;
-  }
-
   @media screen and (max-width: 830px){
     display: ${props => props.theme.isOpen ? 'block' : 'none'};
-    width: ${props => props.theme.isOpen && '100vw'};
-    height: ${props => props.theme.isOpen && '100vh'};
-    margin-top: ${props => props.theme.isOpen && '8rem'};
+    width: ${props => props.theme.isOpen && '100%'};
+    height: ${props => props.theme.isOpen && '20rem'};
+    margin-top: ${props => props.theme.isOpen && '0'};
     z-index: 999;
     transition: 0.3s ease-in ease;
   }
@@ -59,6 +55,10 @@ export const NavLink = styled(Link)`
   display: flex;
   cursor: pointer;
 
+  :hover{
+    border-bottom: 2px solid #FE3189;
+  }
+
 `
 
 export const LinkScroll = styled(ScrollLink)`
@@ -70,6 +70,9 @@ export const LinkScroll = styled(ScrollLink)`
   text-transform: uppercase;
   display: flex;
   cursor: pointer;
+  :hover{
+    border-bottom: 2px solid #FE3189;
+  }
 
 `
 

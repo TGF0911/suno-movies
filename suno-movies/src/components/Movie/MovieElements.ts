@@ -59,8 +59,7 @@ export const MovieInfo = styled.div`
 `
 
 export const MovieTitle = styled(Link)`
-  width: ${props => (props.theme.isLatest && '12rem')};
-  width: ${props => (!props.theme.isGrid && '50rem')};
+  width: ${props => (props.theme.isLatest ? '12rem' : !props.theme.isGrid  && '50rem')};
   color: #EAEAEA;
   font-size: ${props => (props.theme.isLatest ? '1.2rem' : '1.5rem')};
   font-weight: 400;
@@ -82,7 +81,7 @@ export const MovieTitle = styled(Link)`
 `
 
 export const MovieGenre = styled.p`
-  width: ${props => (props.theme.isGrid ? '12rem' : '30rem')};
+  width: ${props => (props.theme.isGrid | props.theme.isLatest ? '12rem' : '30rem')};
   font-size: 1.2rem;
   color: #FE3189;
   margin-top: 0.5rem;

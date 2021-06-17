@@ -18,11 +18,10 @@ import {
 } from './CatalogElements'
 
 export const Catalog = () => {
-  const { movieList, getMovies, loadingMore, topRating } = useCatalog()
+  const { movieList, getMovies, loadingMore, topRating, isGrid } = useCatalog()
 
   const [limit, setLimit] = useState(6);
   const [count, setCount] = useState(0)
-  const [isGrid, setIsGrid] = useState(true)
 
   useEffect(() => {
     getMovies()
@@ -36,7 +35,6 @@ export const Catalog = () => {
     setLimit(limit + 4);
     setCount(count + 1)
   }
-
 
   return (
     <CatalogDiv id='catalog'>

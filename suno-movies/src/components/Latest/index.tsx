@@ -8,7 +8,7 @@ import {
   LatestDot,
   LatestHeader,
   LatestTitle,
-  ArrowRigth,
+  ArrowRight,
   ArrowLeft,
 } from "./LatestElements"
 
@@ -25,7 +25,7 @@ export const Latest = () => {
   const [latestList, setLatestList] = useState<Movie[]>([])
 
   const [limit, setLimit] = useState(4);
-  const [activeIndex, setactiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
     api.get('/movie/now_playing', {
@@ -42,20 +42,20 @@ export const Latest = () => {
   function nextCard() {
     if (activeIndex + 5 < 15) {
       setLimit(limit + 5)
-      setactiveIndex(activeIndex + 5)
+      setActiveIndex(activeIndex + 5)
     } else {
       setLimit(4)
-      setactiveIndex(0)
+      setActiveIndex(0)
     }
   }
 
   function previousCard() {
     if (activeIndex - 5 < 1) {
       setLimit(limit - 5)
-      setactiveIndex(activeIndex - 5)
+      setActiveIndex(activeIndex - 5)
     } else {
       setLimit(13)
-      setactiveIndex(15)
+      setActiveIndex(15)
     }
   }
 
@@ -83,7 +83,7 @@ export const Latest = () => {
             ))
           }
         </CarouselInner>
-        <ArrowRigth onClick={nextCard} />
+        <ArrowRight onClick={nextCard} />
       </Carousel>
     </LatestContainer>
   )

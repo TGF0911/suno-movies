@@ -63,7 +63,7 @@ export const ArrowLeft = styled(IoIosArrowBack)`
   color: #fff;
 `
 
-export const ArrowRigth = styled(IoIosArrowForward)`
+export const ArrowRight = styled(IoIosArrowForward)`
   font-size: 3rem;
   color: #fff;
 `

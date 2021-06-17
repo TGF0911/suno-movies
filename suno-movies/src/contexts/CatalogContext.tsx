@@ -19,10 +19,12 @@ type Movie = {
 type CatalogContextData = {
   page: number;
   movieList: Movie[];
+  isGrid: boolean;
   getMovies: () => void;
   loadingMore: () => void;
   topRating: () => void;
   genreFilter: (genresId: number) => void;
+  changeListType: (isGrid: boolean) => void;
 }
 
 const CatalogContext = createContext({} as CatalogContextData)
@@ -32,6 +34,7 @@ export function CatalogProvider({ children }: CatalogContextProps) {
   const [page, setPage] = useState(1)
   const [movieList, setMovieList] = useState<Movie[]>([])
   const [url, setUrl] = useState([''])
+  const [isGrid, setIsGrid] = useState(false)
 
   async function getMovies() {
     const { data } = await api.get('/movie/popular', {
@@ -85,6 +88,10 @@ export function CatalogProvider({ children }: CatalogContextProps) {
     setPage(page + 1)
   }
 
+  function changeListType(isGrid: boolean){
+    setIsGrid(isGrid)
+  }
+
 
   return (
     <CatalogContext.Provider value={{
@@ -93,7 +100,9 @@ export function CatalogProvider({ children }: CatalogContextProps) {
       getMovies,
       loadingMore,
       genreFilter,
-      topRating
+      topRating,
+      changeListType,
+      isGrid,
     }}>
       {children}
     </CatalogContext.Provider>

@@ -1,11 +1,10 @@
 import { SelectHTMLAttributes, useEffect, useState } from 'react'
 import { useCatalog } from '../../contexts/CatalogContext'
 import { api, apiKey } from '../../service/api'
-import { Select, Option, SelectContainer } from './SelectFilterElements'
+import { Select, Option } from './SelectFilterElements'
 
-interface SelectFilterProps extends SelectHTMLAttributes<HTMLSelectElement>{
-  type: string
-  
+interface SelectFilterProps extends SelectHTMLAttributes<HTMLSelectElement> {
+  type: string;
 }
 
 interface Genre {
@@ -13,9 +12,8 @@ interface Genre {
   name: string;
 }
 
-
 export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
-  const { genreFilter } = useCatalog()
+  const { genreFilter, changeListType } = useCatalog()
   const [genre, setGenre] = useState<Genre[]>([])
   const [genreValue, setGenreValue] = useState(0)
   const [isGrid, setIsGrid] = useState('false')
@@ -33,13 +31,17 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
     genreFilter(genreValue)
   }, [genreValue])
 
+  useEffect(() => {
+    changeListType(Boolean(isGrid))
+  }, [isGrid])
+
 
   return (
     <>
       {
         type === 'list' ? (
           <Select className='list-type' value={isGrid} onChange={e => {
-            setIsGrid(e.target.value)    
+            setIsGrid(e.target.value)
           }}>
             <Option value='false'>por lista</Option>
             <Option value='true'>por grid</Option>
@@ -47,7 +49,7 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
 
         ) : (
           <Select value={genreValue} onChange={e => {
-            setGenreValue(Number(e.target.value))    
+            setGenreValue(Number(e.target.value))
           }}>
             <Option value="" hidden>por genêro</Option>
             {
@@ -56,7 +58,7 @@ export const SelectFilter = ({ type, ...rest }: SelectFilterProps) => {
               ))
             }
           </Select>
-        ) 
+        )
       }
     </>
   )
